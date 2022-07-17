@@ -55,11 +55,13 @@ embarked = embarked[1:]
 man = sex.count('male')
 women = sex.count('female')
 
-x = np.arange(2)
-values = [man,women]
-kinds = ['male','female']
-plt.bar(x,values,color='b')
-plt.xticks(x,kinds)
+sex_x = np.arange(2)
+sex_val = [man,women]
+sex_kinds = ['male','female']
+sex_colors = ['b','r']
+
+plt.bar(sex_x,sex_val,color=sex_colors,width=0.3)
+plt.xticks(sex_x,sex_kinds)
 plt.show()
 
 # for i in range(len(passengerid)):
