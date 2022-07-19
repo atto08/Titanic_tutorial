@@ -1,7 +1,7 @@
 import csv
 
 def read_csv():
-    o=open("test.csv","r",encoding="utf-8")
+    o=open("../test.csv","r",encoding="utf-8")
     rd=csv.reader(o)
     ret=[]
     for i in rd:
@@ -20,11 +20,6 @@ def parsing(data):
             file2[i].append(file1[j][i])
     for k in file2:
         print(k)
-
-
-
-
-
 
 
 

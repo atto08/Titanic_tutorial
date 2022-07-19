@@ -5,7 +5,7 @@ import pandas as pd
 from numpy import int64 , float64
 '''얘를 전역변수로 선언하지않으면 parsing함수에서 rd를 못받음.'''
 '''왜????????????????????'''
-o = open('test.csv', 'r', encoding="utf-8")
+o = open('../test.csv', 'r', encoding="utf-8")
 rd = csv.reader(o)
 
 #컬럼 별 전역변수 리스트 생성
@@ -22,7 +22,7 @@ cabin = []
 embarked = []
 
 def read_csv(): #CSV읽는 함수
-    o = open('test.csv', 'r', encoding="utf-8")
+    o = open('../test.csv', 'r', encoding="utf-8")
     rd = csv.reader(o)
     # rd = pd.read_csv("test.csv",
     #                  dtype={"PassengerId": int64, "Pclass": int64, "Name": object, "Sex": object, "Age": float64,"Sibsp": int64,
