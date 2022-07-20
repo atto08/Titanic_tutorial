@@ -24,41 +24,44 @@ def parsing(data): #CSV파싱 함수
     for k in file2:
         print(k)
 
-def write(data2):
-    field_names = ['PassengerId']
-    file1=[]
-    file2=[[],[],[],[],[],[],[],[],[],[],[]]
-    passengerid = [{'PassengerId':{}}]
-    pclass = []
-    name = []
-    sex = []
-    age = []
-    sibsp = []
-    parch = []
-    ticket = []
-    fare = []
-    cabin = []
-    embarked = []
+def save_csv(data2):
+    labels = ['PassengerId','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked']
+    label = []
+    value1=[]
+    value2=[[],[],[],[],[],[],[],[],[],[],[]]
     for line in data2:
-        file1.append(line)
-    for i in range(0,11):
-        for j in range(0,418):
-            file2[i].append(file1[j][i])
-    passengerid.append(file2[0])
-    pclass.append(file2[1])
-    name.append(file2[2])
-    sex.append(file2[3])
-    age.append(file2[4])
-    sibsp.append(file2[5])
-    parch.append(file2[6])
-    ticket.append(file2[7])
-    fare.append(file2[8])
-    cabin.append(file2[9])
-    embarked.append(file2[10])
-    with open('test1.csv','w',newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=field_names)
-        writer.writeheader()
-        writer.writerows(passengerid[0])
+        value1.append(line)
+    for i in range(0,418):
+        for j in range(0,11):
+            value2[j].append(value1[i][j])
+
+        with open('passengerid', 'w', newline='') as f:
+            write = csv.writer(f)
+            write.writerow(labels[:1])
+            write.writerows(value2[0])
+
+#     for line in data5:
+#         file1.append(line)
+#     for i in range(0,11):
+#         for j in range(0,418):
+#             file2[i].append(file1[j][i])
+#     passengerid.append(file2[0])
+#     pclass.append(file2[1])
+#     name.append(file2[2])
+#     sex.append(file2[3])
+#     age.append(file2[4])
+#     sibsp.append(file2[5])
+#     parch.append(file2[6])
+#     ticket.append(file2[7])
+#     fare.append(file2[8])
+#     cabin.append(file2[9])
+#     embarked.append(file2[10])
+#     # print(passengerid[0])
+#     with open('name.csv', 'w',newline='') as f:
+#         # using csv.writer method from CSV package
+#         write = csv.writer(f)
+#         write.writerow(fields)
+#         write.writerows(name)
         # for a in range(0,11):
         #     if a == 0:
         #         field_names = ['PassengerId']
@@ -122,13 +125,11 @@ def add_value_label(x_list,y_list):
         plt.annotate(y_list[i-1],(i,y_list[i-1]),ha="center")
 
 
-
-
 if __name__ == "__main__":
     read_csv()
     rap = read_csv()
-    write(rap)
-    # parsing(rap)
+    save_csv(rap)
+
 
 
 

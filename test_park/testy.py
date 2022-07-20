@@ -1,16 +1,19 @@
 import csv
 
-field_names = ['No', 'Name', 'Car Model']
+# field names
+fields = ['Name', 'Branch', 'Year', 'CGPA']
 
-cars = [
-    {'No': 1, 'Name': 'Benzema', 'Car Model': '488 GTB'},
-    {'No': 2, 'Name': 'Kroos', 'Car Model': '918 Spyder'},
-    {'No': 3, 'Name': 'Casemiro', 'Car Model': 'La Voiture Noire'},
-    {'No': 4, 'Name': 'Vinicius', 'Car Model': 'Phantom'},
-    {'No': 5, 'Name': 'Modric', 'Car Model': 'BMW X7'},
-]
+# data rows of csv file
+rows = [['Nikhil', 'COE', '2', '9.0'],
+        ['Sanchit', 'COE', '2', '9.1'],
+        ['Aditya', 'IT', '2', '9.3'],
+        ['Sagar', 'SE', '1', '9.5'],
+        ['Prateek', 'MCE', '3', '7.8'],
+        ['Sahil', 'EP', '2', '9.1']]
 
-with open('Real.csv', 'w',newline='') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=field_names)
-    writer.writeheader()
-    writer.writerows(cars)
+with open('GFG', 'w') as f:
+    # using csv.writer method from CSV package
+    write = csv.writer(f)
+
+    write.writerow(fields)
+    write.writerows(rows[0])
