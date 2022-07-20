@@ -1,7 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
-
+from typing import List
 
 
 def read_csv(): #CSV읽는 함수
@@ -24,13 +24,97 @@ def parsing(data): #CSV파싱 함수
     for k in file2:
         print(k)
 
-def write():
-    field_names = []
-    index_val = []
-    with open('test.csv','w',newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames = field_names )
+def write(data2):
+    field_names = ['PassengerId']
+    file1=[]
+    file2=[[],[],[],[],[],[],[],[],[],[],[]]
+    passengerid = [{'PassengerId':{}}]
+    pclass = []
+    name = []
+    sex = []
+    age = []
+    sibsp = []
+    parch = []
+    ticket = []
+    fare = []
+    cabin = []
+    embarked = []
+    for line in data2:
+        file1.append(line)
+    for i in range(0,11):
+        for j in range(0,418):
+            file2[i].append(file1[j][i])
+    passengerid.append(file2[0])
+    pclass.append(file2[1])
+    name.append(file2[2])
+    sex.append(file2[3])
+    age.append(file2[4])
+    sibsp.append(file2[5])
+    parch.append(file2[6])
+    ticket.append(file2[7])
+    fare.append(file2[8])
+    cabin.append(file2[9])
+    embarked.append(file2[10])
+    with open('test1.csv','w',newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=field_names)
         writer.writeheader()
-        writer.writerows()
+        writer.writerows(passengerid[0])
+        # for a in range(0,11):
+        #     if a == 0:
+        #         field_names = ['PassengerId']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(passengerid)
+        #     elif a == 1:
+        #         field_names = ['Pclass']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(pclass)
+        #     elif a == 2:
+        #         field_names = ['Name']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(name)
+        #     elif a == 3:
+        #         field_names = ['Sex']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(sex)
+        #     elif a == 4:
+        #         field_names = ['Age']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(age)
+        #     elif a == 5:
+        #         field_names = ['SibSp']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(sibsp)
+        #     elif a == 6:
+        #         field_names = ['Parch']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(parch)
+        #     elif a == 7:
+        #         field_names = ['Ticket']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(ticket)
+        #     elif a == 8:
+        #         field_names = ['Fare']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(fare)
+        #     elif a == 9:
+        #         field_names = ['Cabin']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(cabin)
+        #     elif a == 10:
+        #         field_names = ['Embarked']
+        #         writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        #         writer.writeheader()
+        #         writer.writerows(embarked)
 
 
 def add_value_label(x_list,y_list):
@@ -43,7 +127,8 @@ def add_value_label(x_list,y_list):
 if __name__ == "__main__":
     read_csv()
     rap = read_csv()
-    parsing(rap)
+    write(rap)
+    # parsing(rap)
 
 
 
