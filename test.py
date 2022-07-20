@@ -1,8 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-from numpy import int64 , float64
+
 
 
 def read_csv(): #CSV읽는 함수
@@ -20,16 +19,25 @@ def parsing(data): #CSV파싱 함수
     for line in data:
         file1.append(line)
     for i in range(0,11):
-        for j in range(0,417):
+        for j in range(0,418):
             file2[i].append(file1[j][i])
     for k in file2:
         print(k)
 
+def write():
+    field_names = []
+    index_val = []
+    with open('test.csv','w',newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames = field_names )
+        writer.writeheader()
+        writer.writerows()
 
 
 def add_value_label(x_list,y_list):
     for i in range(1, len(x_list)+1):
         plt.annotate(y_list[i-1],(i,y_list[i-1]),ha="center")
+
+
 
 
 if __name__ == "__main__":
@@ -101,10 +109,3 @@ if __name__ == "__main__":
 # eighty
 # ninety
 # hundred
-
-
-# def write():
-#     f = open('test.csv', 'w', encoding='utf-8', newline='')
-#     wt = csv.writer(f)
-#     wt.writerows([i])
-#     print()
