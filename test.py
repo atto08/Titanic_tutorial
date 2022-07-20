@@ -26,19 +26,21 @@ def parsing(data): #CSV파싱 함수
 
 def save_csv(data2):
     labels = ['PassengerId','Pclass','Name','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked']
-    label = []
     value1=[]
     value2=[[],[],[],[],[],[],[],[],[],[],[]]
     for line in data2:
         value1.append(line)
-    for i in range(0,418):
-        for j in range(0,11):
-            value2[j].append(value1[i][j])
+    for i in range(0,11):
+        for j in range(0,418):
+            value2[i].append(value1[j][i])
+    for k in value2:
+        k = value2[:1]
 
-        with open('passengerid', 'w', newline='') as f:
-            write = csv.writer(f)
-            write.writerow(labels[:1])
-            write.writerows(value2[0])
+    with open("newown.csv", 'w', newline='') as f:
+        write = csv.writer(f)
+        write.writerow(labels[:1])
+        for p in k:
+            write.writerows(p)
 
 #     for line in data5:
 #         file1.append(line)
