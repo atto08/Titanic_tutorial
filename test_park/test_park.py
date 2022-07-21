@@ -5,6 +5,8 @@ import pandas as pd
 from numpy import int64 , float64
 '''얘를 전역변수로 선언하지않으면 parsing함수에서 rd를 못받음.'''
 '''왜????????????????????'''
+# Todo에 설명해놓음
+# 하루 작업물은 반드시 당일 작업한내용 commit 할것
 o = open('../test.csv', 'r', encoding="utf-8")
 rd = csv.reader(o)
 
@@ -41,7 +43,7 @@ def read_csv(): #CSV읽는 함수
         embarked.append(list[10])
 
     return rd
-
+#TODO: " rd = read_csv() " 처럼 리턴을 받는 객체가 누락되어있음
 read_csv()
 passengerid = passengerid[1:]
 pclass = pclass[1:]

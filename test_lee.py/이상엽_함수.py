@@ -29,3 +29,5 @@ if __name__ == "__main__":
     read_csv()
     rap = read_csv()
     parsing(rap)
+
+    #TODO: 하루에 한번 PC종료전 git에 반드시 commit 할것
