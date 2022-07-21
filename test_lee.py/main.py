@@ -15,7 +15,7 @@ def parsing(data):
     for line in data:
         file1.append(line)
     for i in range(0,11):
-        for j in range(0,417):
+        for j in range(0,418):
             file2[i].append(file1[j][i])
 
     return file2
@@ -25,9 +25,9 @@ def save_csv(data2):
     with open("test2.csv", "w",newline="") as f:
         writer = csv.writer(f)
 
-        writer.writerow((["pessenger ID"]))
+        writer.writerow((["passengerID"]))
 
-        for i in range(0,417):
+        for i in range(0,418):
                 writer.writerows([[data2[0][i]]])
 
         f.close()
