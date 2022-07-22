@@ -1,7 +1,7 @@
 import csv
 
-def read_csv(ccc):
-    o=open(ccc,"r",encoding="utf-8")
+def read_csv():
+    o=open("test.csv","r",encoding="utf-8")
     rd=csv.reader(o)
     ret=[]
     for i in rd:
@@ -53,6 +53,6 @@ def save_csv(data2,csv_name,n):
 
 
 if __name__ == "__main__":
-    rap = read_csv('test.csv')
+    rap = read_csv()
     rap2 = parsing(rap)
-    save_csv(rap2,"name.csv",2)
+    save_csv(rap2,"embarked.csv",10)
