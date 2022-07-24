@@ -100,6 +100,21 @@ def draw_gp_sex(filename):
     plt.title("Rate of Sex")
     plt.show()
 
+    # Todo: check variable data type
+    # params mean row lists
+    # ex) [0,None,,1,2,3.1] --> [0,-1,-1,1,2,-1]
+    def IsIntType(params=[]):
+        ret = []
+        for param in params:
+            if param is int:
+                ret.append(param)
+            # if you want replace "None" -> -1 used this conditional sentence
+            else:
+                ret.append(-1)
+        return ret
+
+
+
 
 # def draw_graph(filename,num):
 #     o = open(filename, "r", encoding="utf-8")
