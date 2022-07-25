@@ -54,6 +54,17 @@ def save_csv(p_data,csv_name,n):
         f.close()
 
 
+def IsFloatType(params=[]):
+    ret = []
+    for param in params:
+        if param is float:
+            ret.append(param)
+        # if you want replace "None" -> -1 used this conditional sentence
+        else:
+            ret.append(-1)
+    return ret
+
+
 def draw_gp_pclass(filename):
     o = open(filename, "r", encoding="utf-8")
     rd = csv.reader(o)
@@ -63,6 +74,7 @@ def draw_gp_pclass(filename):
         tot.append(i)
     for j in tot:
         tot2.append(j[0])
+
     upper = tot2.count('1')
     middle = tot2.count('2')
     lower = tot2.count('3')
@@ -87,6 +99,7 @@ def draw_gp_sex(filename):
         tot.append(i)
     for j in tot:
         tot2.append(j[0])
+
     men = tot2.count('male')
     women = tot2.count('female')
 
@@ -113,6 +126,59 @@ def draw_gp_sex(filename):
                 ret.append(-1)
         return ret
 
+def draw_gp_age(filename):
+    o = open(filename, "r", encoding="utf-8")
+    rd = csv.reader(o)
+    tot = []
+    tot2 = []
+    # age0 = []
+    # age10 = []
+    # age20 = []
+    # age30 = []
+    # age40 = []
+    # age50 = []
+    # age60 = []
+    # age70 = []
+    # agen = []
+    def IsFloatType2(params=[]):
+        ret = []
+        for param in params:
+            if param is int or float:
+                ret.append(float(param))
+            elif param is None:
+                ret.append(-1)
+            # if you want replace "None" -> -1 used this conditional sentence
+            else:
+                ret.append(-1)
+        return ret
+    for i in rd:
+        tot.append(i)
+    for j in tot:
+        tot2.append(j[0])
+    tot3 = tot2[1:]
+    IsFloatType2(tot3)
+    print(tot3)
+    # for i in tot3:
+    #     if 0 < i <= 10:
+    #         age0.append(i)
+    #     elif 10 < i <= 20:
+    #         age10.append(i)
+    #     elif 20 < i <= 30:
+    #         age20.append(i)
+    #     elif 30 < i <= 40:
+    #         age30.append(i)
+    #     elif 40 < i <= 50:
+    #         age40.append(i)
+    #     elif 50 < i <= 60:
+    #         age50.append(i)
+    #     elif 60 < i <= 70:
+    #         age60.append(i)
+    #     elif 70 < i <= 80:
+    #         age70.append(i)
+    #     else:
+    #         agen.append("None")
+    # print(age0)
+
 
 
 
@@ -125,6 +191,7 @@ def draw_gp_sex(filename):
 #         tot.append(i)
 #     for j in tot:
 #         tot2.append(j[0])
+#
 #     var1 = tot2.count('male')
 #     var2 = tot2.count('female')
 #     var3 = tot2.count('')
@@ -143,5 +210,7 @@ def draw_gp_sex(filename):
 if __name__ == "__main__":
     rap = read_csv('test.csv')
     rap2 = parsing(rap)
-    save_csv(rap2,"age.csv",4)
+    # save_csv(rap2,"age.csv",4)
     # draw_gp_pclass("pclass.csv")
+    draw_gp_age("age.csv")
+
