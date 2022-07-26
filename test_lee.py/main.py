@@ -74,13 +74,13 @@ def Age_gr():
     Age_int = []
     for i in Age:
         if i == "":
-            Age.remove("")
-
+            Age.append(-1)
+            A_a=Age.count(-1)
         elif i is not float:
             Age_int.append(float(i))
 
     print(Age_int)
-
+    print(A_a)
 def Embarked_gr():
     o = open("Embarked.csv", "r", encoding="utf-8")
     rd = csv.reader(o)
