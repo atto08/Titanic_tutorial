@@ -21,16 +21,18 @@ def parsing(data):
     return file2
 
 def save_csv(data2):
+    name = {"0": "PassengerId", "1": "Pclass", "2": "Name", "3": "Sex", "4": "Age", "5": "SibSp", "6": "Parch"
+            ,"7":"Ticket", "8": "Fare", "9": "Cabin", "10": "Embarked"}
+    for n in range(0,11):
+        with open(name[str(n)]+".csv", "w",newline="") as f:
+            writer = csv.writer(f)
 
-    with open("test2.csv", "w",newline="") as f:
-        writer = csv.writer(f)
+            writer.writerow(([name[str(n)]]))
 
-        writer.writerow((["passengerID"]))
+            for i in range(0,418):
+                     writer.writerows([[data2[n][i]]])
 
-        for i in range(0,418):
-                writer.writerows([[data2[0][i]]])
-
-        f.close()
+            f.close()
 
 if __name__ == "__main__":
     rap = read_csv()
