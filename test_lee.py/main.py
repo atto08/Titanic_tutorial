@@ -66,19 +66,20 @@ def Age_gr():
     o = open("Age.csv", "r", encoding="utf-8")
     rd = csv.reader(o)
     Age = []
-    Age_int = []
     for i in rd:
         for j in i:
             Age.append(j)
 
     Age.pop(0)
+    Age_int = []
+    for i in Age:
+        if i == "":
+            Age.remove("")
 
-def Age_gr_i_f(Ag):
+        elif i is not float:
+            Age_int.append(float(i))
 
-
-
-
-    print(Age)
+    print(Age_int)
 
 def Embarked_gr():
     o = open("Embarked.csv", "r", encoding="utf-8")
@@ -102,6 +103,4 @@ if __name__ == "__main__":
     Pclass_gr()
     Sex_gr()
     Age_gr()
-    a_i_f=age_gr()
-    Age_gr_i_f(a_i_f)
     Embarked_gr()
