@@ -1,7 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
-
+import pandas as pd
 
 def read_csv(csv_name):
     o=open(csv_name,"r",encoding="utf-8")
@@ -29,25 +29,25 @@ def save_csv(p_data,csv_name,n):
         writer = csv.writer(f)
         if n == 0:
             writer.writerow(labels[0:1])
-        elif n== 1:
+        elif n == 1:
             writer.writerow(labels[n:n+1])
-        elif n== 2:
+        elif n == 2:
             writer.writerow(labels[n:n+1])
-        elif n== 3:
+        elif n == 3:
             writer.writerow(labels[n:n+1])
-        elif n== 4:
+        elif n == 4:
             writer.writerow(labels[n:n+1])
-        elif n== 5:
+        elif n == 5:
             writer.writerow(labels[n:n+1])
-        elif n== 6:
+        elif n == 6:
             writer.writerow(labels[n:n+1])
-        elif n== 7:
+        elif n == 7:
             writer.writerow(labels[n:n+1])
-        elif n== 8:
+        elif n == 8:
             writer.writerow(labels[n:n+1])
-        elif n== 9:
+        elif n == 9:
             writer.writerow(labels[n:n+1])
-        elif n== 10:
+        elif n == 10:
             writer.writerow(labels[n:])
         for i in range(0,418):
             writer.writerows([[p_data[n][i]]])
@@ -57,11 +57,12 @@ def save_csv(p_data,csv_name,n):
 def IsFloatType(params=[]):
     ret = []
     for param in params:
-        if param is float:
-            ret.append(param)
+        if param == '':
+            ret.append(-1)
         # if you want replace "None" -> -1 used this conditional sentence
         else:
-            ret.append(-1)
+            ret.append(float(param))
+    print(ret)
     return ret
 
 
@@ -126,6 +127,7 @@ def draw_gp_sex(filename):
                 ret.append(-1)
         return ret
 
+
 def draw_gp_age(filename):
     o = open(filename, "r", encoding="utf-8")
     rd = csv.reader(o)
@@ -140,24 +142,13 @@ def draw_gp_age(filename):
     # age60 = []
     # age70 = []
     # agen = []
-    def IsFloatType2(params=[]):
-        ret = []
-        for param in params:
-            if param is int or float:
-                ret.append(float(param))
-            elif param is None:
-                ret.append(-1)
-            # if you want replace "None" -> -1 used this conditional sentence
-            else:
-                ret.append(-1)
-        return ret
     for i in rd:
         tot.append(i)
     for j in tot:
         tot2.append(j[0])
     tot3 = tot2[1:]
-    IsFloatType2(tot3)
-    print(tot3)
+    IsFloatType(tot3)
+
     # for i in tot3:
     #     if 0 < i <= 10:
     #         age0.append(i)
@@ -210,7 +201,7 @@ def draw_gp_age(filename):
 if __name__ == "__main__":
     rap = read_csv('test.csv')
     rap2 = parsing(rap)
-    # save_csv(rap2,"age.csv",4)
+    # save_csv(rap2,"fare.csv",8)
     # draw_gp_pclass("pclass.csv")
     draw_gp_age("age.csv")
 
