@@ -1,6 +1,6 @@
 import csv
-import matplotlib
-
+import matplotlib.pyplot as plt
+import numpy as np
 
 def read_csv():
     o=open("../test.csv","r",encoding="utf-8")
@@ -49,6 +49,15 @@ def Pclass_gr():
     P2=Pclass.count("2")
     P3=Pclass.count("3")
 
+    x = np.arange(3)
+    Pc = ["1","2","3"]
+    values = [P1,P2,P3]
+    colors = ["r","g","b"]
+
+    plt.bar(x, values, color=colors)
+    plt.xticks(x,Pc)
+
+    plt.show()
 
 def Sex_gr():
     o = open("Sex.csv", "r", encoding="utf-8")
