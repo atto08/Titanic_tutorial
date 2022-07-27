@@ -49,6 +49,7 @@ def Pclass_gr():
     P2=Pclass.count("2")
     P3=Pclass.count("3")
 
+            #막대그래프
     x = np.arange(3)
     Pc = ["1","2","3"]
     values = [P1,P2,P3]
@@ -57,7 +58,14 @@ def Pclass_gr():
     plt.bar(x, values, color=colors)
     plt.xticks(x,Pc)
 
+
+    plt.title("Pclass_values")
+    plt.xlabel("Pclass")
+    plt.ylabel("values")
+
     plt.show()
+
+
 
 def Sex_gr():
     o = open("Sex.csv", "r", encoding="utf-8")
