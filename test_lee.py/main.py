@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def read_csv():
-    o=open("../test.csv","r",encoding="utf-8")
+    o=open("../Test/test.csv", "r", encoding="utf-8")
     rd=csv.reader(o)
     ret=[]
     for i in rd:

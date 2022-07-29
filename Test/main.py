@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 def read_csv():
-    o=open("test.csv","r",encoding="utf-8")
+    o=open("test.csv", "r", encoding="utf-8")
     rd=csv.reader(o)
     ret=[]
     for i in rd:
