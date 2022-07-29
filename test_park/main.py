@@ -62,7 +62,6 @@ def IsFloatType(params=[]):
         # if you want replace "None" -> -1 used this conditional sentence
         else:
             ret.append(float(param))
-    print(ret)
     return ret
 
 
@@ -128,26 +127,35 @@ def draw_gp_sex(filename):
         return ret
 
 
-def draw_gp_age(filename):
+def draw_gp_age(filename,filename2):
     o = open(filename, "r", encoding="utf-8")
+    p = open(filename2, "r", encoding="utf-8")
     rd = csv.reader(o)
+    rd2 = csv.reader(p)
     tot = []
     tot2 = []
-    # age0 = []
-    # age10 = []
-    # age20 = []
-    # age30 = []
-    # age40 = []
-    # age50 = []
-    # age60 = []
-    # age70 = []
-    # agen = []
     for i in rd:
         tot.append(i)
     for j in tot:
         tot2.append(j[0])
     tot3 = tot2[1:]
-    IsFloatType(tot3)
+    age_f = IsFloatType(tot3)
+
+    pot = []
+    pot2 = []
+    for p in rd2:
+        pot.append(p)
+    for q in pot:
+        pot2.append(q[0])
+    pot3 = pot2[1:]
+    fare_f = IsFloatType(pot3)
+
+    plt.xlabel("Age")
+    plt.ylabel("Fare")
+    plt.scatter(age_f,fare_f,s=500,c='r',alpha=0.5)
+    plt.show()
+
+
 
     # for i in tot3:
     #     if 0 < i <= 10:
@@ -203,5 +211,5 @@ if __name__ == "__main__":
     rap2 = parsing(rap)
     # save_csv(rap2,"fare.csv",8)
     # draw_gp_pclass("pclass.csv")
-    draw_gp_age("age.csv")
+    draw_gp_age("age.csv","fare.csv")
 

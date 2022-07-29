@@ -1,19 +1,18 @@
-import csv
+import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 
-# Use pandas
-def draw_age():
-    df = pd.read_csv("https://raw.githubusercontent.com/yganalyst/data_example/main/titanic/train.csv", dtype=str)
-    df[["Age"]] = df[["Age"]].astype(float)
-    df["Age"] = df["Age"].fillna(df["Age"].median())
-    df.head(5)
+# Fixing random state for reproducibility
+np.random.seed(19680801)
 
-    plt.title("Histogram", fontsize=15)
-    frq, bins, fig = plt.hist(df["Age"], bins=10, alpha=1, color='r')
-    plt.ylabel("Bindo", fontsize=13)
-    plt.xlabel("Ages", fontsize=13)
-    plt.grid()
-    plt.show()
-    print("*빈도 array :", frq)
-    print("*구간 array :", bins)
+
+N = 100
+x = np.random.rand(N)
+y = np.random.rand(N)
+colors = np.random.rand(N)
+area = (30 * np.random.rand(N))**2  # 0 to 15 point radii
+xv = [65,37,48,29,54,84,19]
+yc = [1,2,3,4,5,6,7]
+
+
+plt.scatter(xv, yc, s=500, c='r', alpha=0.5)
+plt.show()
