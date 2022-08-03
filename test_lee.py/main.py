@@ -43,7 +43,6 @@ def Pclass_gr():
     for i in rd:
         for j in i:
             Pclass.append(j)
-    Pclass.pop(0)
 
     P1=Pclass.count("1")
     P2=Pclass.count("2")
@@ -73,7 +72,6 @@ def Sex_gr():
     for i in rd:
         for j in i:
             Sex.append(j)
-    Sex.pop(0)
 
     S1=Sex.count("male")
     S2=Sex.count("female")
@@ -137,32 +135,7 @@ def Age_gr():
         elif j>=90 and j<100:
             Age_group[9].append(j)
 
-    A1=len(Age_group[0])
-    A2=len(Age_group[1])
-    A3=len(Age_group[2])
-    A4=len(Age_group[3])
-    A5=len(Age_group[4])
-    A6=len(Age_group[5])
-    A7=len(Age_group[6])
-    A8=len(Age_group[7])
-    A9=len(Age_group[8])
-    A10=len(Age_group[9])
-
-    x = np.arange(10)
-    Pc = ["0~9","10~19","20~29","30~39","40~49","50~59","60~69","70~79","80~89","90~99"]
-    values = [A1,A2,A3,A4,A5,A6,A7,A8,A9,A10]
-    colors = ["tab:blue","tab:orange","tab:green","tab:red","tab:purple","tab:brown","tab:pink","tab:gray","tab:olive","tab:cyan"]
-
-    plt.bar(x, values, width=0.4)
-    plt.bar(x, values, color=colors)
-    plt.xticks(x,Pc)
-
-
-    plt.title("Age_values")
-    plt.xlabel("Age")
-    plt.ylabel("values")
-
-    plt.show()
+    print(Age_group)
 
 def Embarked_gr():
     o = open("Embarked.csv", "r", encoding="utf-8")
