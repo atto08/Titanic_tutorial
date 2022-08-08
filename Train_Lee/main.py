@@ -498,12 +498,7 @@ def pclass_data(ppfn1,ppfn2):
             pclass_i.append(int(i))
 
     for i in range(0,891):
-        if pclass_i[i]==0:
-            if ppfn2[i] == "0":
-                pc0.append(0)
-            else:
-                pc0.append(1)
-        elif pclass_i[i]==1:
+        if pclass_i[i]==1:
             if ppfn2[i] == "0":
                 pc1.append(0)
             else:
@@ -518,7 +513,33 @@ def pclass_data(ppfn1,ppfn2):
                 pc3.append(0)
             else:
                 pc3.append(1)
+    print(len(pc1),len(pc2),len(pc3))
 
+    x = np.arange(3)  # x값 개수
+    Pc = ["1","2","3"]  # x값
+    values = [pc1.count(1) / len(pc1) * 100,
+              pc2.count(1) / len(pc2) * 100, pc3.count(1) / len(pc3) * 100]
+
+    colors = ["tab:blue", "tab:orange", "tab:green"]  # 막대 컬러
+
+    for i in range(len(Pc)):
+        plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
+    plt.xticks(x, Pc)  # x를 순서대로 나열
+
+    plt.title("Survival rate by Pclass")  # 차트 제목
+    plt.xlabel("Pclass")  # x축 레이블
+    plt.ylabel("values")  # y축 레이블
+
+    plt.ylim(0, 100)  # y축 범위
+
+    bar = plt.bar(x, values, color=colors)  # 텍스트 삽입
+    for rect in bar:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2.0, height, "%.1f" % height, ha="center", va="bottom", size=12)
+
+    plt.legend()
+
+    plt.show()
 def sex_data(sfn1,sfn2):
     male=[]
     female=[]
@@ -534,7 +555,32 @@ def sex_data(sfn1,sfn2):
                 female.append(0)
             else:
                 female.append(1)
+    print(len(male),len(female))
 
+    x = np.arange(2)  # x값 개수
+    Pc = ["male","female"]  # x값
+    values = [male.count(1) / len(male) * 100, female.count(1) / len(female) * 100]
+
+    colors = ["tab:blue", "tab:orange"]  # 막대 컬러
+
+    for i in range(len(Pc)):
+        plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
+    plt.xticks(x, Pc)  # x를 순서대로 나열
+
+    plt.title("Survival rate by Sex")  # 차트 제목
+    plt.xlabel("sex")  # x축 레이블
+    plt.ylabel("values")  # y축 레이블
+
+    plt.ylim(0, 100)  # y축 범위
+
+    bar = plt.bar(x, values, color=colors)  # 텍스트 삽입
+    for rect in bar:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2.0, height, "%.1f" % height, ha="center", va="bottom", size=12)
+
+    plt.legend()
+
+    plt.show()
 def sibsp_data(ssfn1,ssfn2):
     #max(ssfn1) #max8
     sib0=[]
@@ -598,8 +644,35 @@ def sibsp_data(ssfn1,ssfn2):
                 sib8.append(0)
             else:
                 sib8.append(1)
+    print(len(sib0),len(sib1),len(sib2),len(sib3),len(sib4),len(sib5),len(sib6),len(sib7),len(sib8))
 
+    x = np.arange(9)  # x값 개수
+    Pc = ["0","1","2","3","4","5","6","7","8"]  # x값
+    values = [sib0.count(1) / len(sib0) * 100, sib1.count(1) / len(sib1) * 100, sib2.count(1) / len(sib2) * 100,
+              sib3.count(1) / len(sib3) * 100, sib4.count(1) / len(sib4) * 100, sib5.count(1) / len(sib5) * 100,
+              0.0, 0.0, sib8.count(1) / len(sib8) * 100]
 
+    colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown",
+              "tab:pink", "tab:gray", "tab:olive"]  # 막대 컬러
+
+    for i in range(len(Pc)):
+        plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
+    plt.xticks(x, Pc)  # x를 순서대로 나열
+
+    plt.title("Survival rate by Sibsp")  # 차트 제목
+    plt.xlabel("sibsp")  # x축 레이블
+    plt.ylabel("values")  # y축 레이블
+
+    plt.ylim(0, 100)  # y축 범위
+
+    bar = plt.bar(x, values, color=colors)  # 텍스트 삽입
+    for rect in bar:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2.0, height, "%.1f" % height, ha="center", va="bottom", size=12)
+
+    plt.legend()
+
+    plt.show()
 
 
 
@@ -607,12 +680,12 @@ if  __name__ == "__main__":
     #rap=read_csv()
     #rap2=parsing(rap)
     #save_csv(rap2)
-    d1=csv_connect1("Parch.csv")
+    d1=csv_connect1("Fare.csv")
     d2=csv_connect2()
     #Cabin_data(d1,d2) #cabin 데이터
     #age_data(d1,d2) #age 데이터
     #embarked_data(d1,d2) #embarked 데이터
-    parch_data(d1,d2) #parch 데이터
+    #parch_data(d1,d2) #parch 데이터
     #fare_data(d1,d2) #fare 데이터
     #pclass_data(d1,d2) #pclass 데이터
     #sex_data(d1,d2) #sex 데이터
