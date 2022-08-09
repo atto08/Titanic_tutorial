@@ -222,7 +222,7 @@ def age_data(afn1,afn2):
             else:
                 none.append(1)
 
-    print(len(a0_10), len(a11_20), len(a21_30), len(a31_40), len(a41_50), len(a51_60), len(a61_70), len(a71_80))
+    print(len(a0_10), len(a11_20), len(a21_30), len(a31_40), len(a41_50), len(a51_60), len(a61_70), len(a71_80),len(none))
 
     x = np.arange(8)  # x값 개수
     Pc = ["0-10","11-20","21-30","31-40","41-50","51-60","61-70","71-80"]  # x값
@@ -680,7 +680,7 @@ if  __name__ == "__main__":
     #rap=read_csv()
     #rap2=parsing(rap)
     #save_csv(rap2)
-    d1=csv_connect1("Fare.csv")
+    d1=csv_connect1("SibSp.csv")
     d2=csv_connect2()
     #Cabin_data(d1,d2) #cabin 데이터
     #age_data(d1,d2) #age 데이터
@@ -689,4 +689,4 @@ if  __name__ == "__main__":
     #fare_data(d1,d2) #fare 데이터
     #pclass_data(d1,d2) #pclass 데이터
     #sex_data(d1,d2) #sex 데이터
-    #sibsp_data(d1,d2) #sibsp 데이터
+    sibsp_data(d1,d2) #sibsp 데이터
