@@ -72,15 +72,9 @@ def Cabin_data(fn1,fn2):
     g=[]
     for i in range(0,891):
         if fn1[i] == "":
-            if fn2[i] == "0":
-                none.append(0)
-            else:
-                none.append(1)
+            fn1[i] = "none"
 
-    while "" in fn1:
-        fn1.remove("")#"" 제외한 fn1 데이터 개수:204
-
-    for i in range(0,204):
+    for i in range(0,891):
         if fn1[i][0] == "A":
             if fn2[i] == "0":
                 a.append(0)
@@ -116,6 +110,11 @@ def Cabin_data(fn1,fn2):
                 g.append(0)
             else:
                 g.append(1)
+        elif fn1[i] == "none":
+            if fn2[i] == "0":
+                none.append(0)
+            else:
+                none.append(1)
 
     x = np.arange(8) #x값 개수
     Pc = ["A", "B", "C", "D", "E", "F", "G", "NONE"] #x값
@@ -150,8 +149,8 @@ def Cabin_data(fn1,fn2):
 
     plt.pie(ratio, labels=labels, autopct="%.1f%%")
     '''
-    print(len(a),len(b),len(c),len(d),len(e),len(f),len(g),len(none))
 
+    print(len(a),len(b),len(c),len(d),len(e),len(f),len(g),len(none))
 
 
 def age_data(afn1,afn2):
@@ -680,13 +679,13 @@ if  __name__ == "__main__":
     #rap=read_csv()
     #rap2=parsing(rap)
     #save_csv(rap2)
-    d1=csv_connect1("SibSp.csv")
+    d1=csv_connect1("Cabin.csv")
     d2=csv_connect2()
-    #Cabin_data(d1,d2) #cabin 데이터
+    Cabin_data(d1,d2) #cabin 데이터
     #age_data(d1,d2) #age 데이터
     #embarked_data(d1,d2) #embarked 데이터
     #parch_data(d1,d2) #parch 데이터
     #fare_data(d1,d2) #fare 데이터
     #pclass_data(d1,d2) #pclass 데이터
     #sex_data(d1,d2) #sex 데이터
-    sibsp_data(d1,d2) #sibsp 데이터
+    #sibsp_data(d1,d2) #sibsp 데이터
