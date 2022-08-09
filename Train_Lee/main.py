@@ -60,6 +60,64 @@ def csv_connect2():
 
     return survive_file
 
+def Cabin_data_Fix(fn1,fn2):
+    ret = {}
+    ret["none"] = []
+    less = min([len(fn1),len(fn2)]) # 두개의 데이터중 더 작은숫자를 기준으로 for문을 돌려야 Exception 안남.
+
+    for i in range(less):
+        if fn1[i] == "":
+            if fn2[i] == "0":
+                ret['none'].append(0)
+            else:
+                ret['none'].append(1)
+            continue
+
+        if not fn1[i][0] in ret:
+            ret[fn1[i][0]] = []
+        if fn2[i] == '0':
+            ret[fn1[i][0]].append(0)
+        else:
+            ret[fn1[i][0]].append(1)
+
+
+    x = np.arange(8) #x값 개수
+    Pc = ["A", "B", "C", "D", "E", "F", "G", "none"] #x값
+    dic_ret = {}
+    values = []
+    for key,value in ret.items():
+        if key != 'T':
+            values.append(value.count(1)/len(value)*100)
+            dic_ret[key] = (value.count(1)/len(value)*100)
+
+    colors = ["tab:blue","tab:orange","tab:green","tab:red","tab:purple","tab:brown","tab:pink"
+              ,"tab:gray"] #막대 컬러
+    cnt = 0
+    for index in range(len(Pc)):
+        bar = plt.bar(cnt, dic_ret[Pc[index]], color=colors[index], label=Pc[index]) #데이터 값, 막대 컬러 적용
+        h = bar[0].get_height()
+        plt.text(bar[0].get_x()+bar[0].get_width()/2.0,h,"%.1f"%h,ha="center",va="bottom",size=12)
+        cnt += 1
+    plt.xticks(x, Pc) #x를 순서대로 나열
+
+    plt.title("Survival rate by cabin") #차트 제목
+    plt.xlabel("cabin") #x축 레이블
+    plt.ylabel("values") #y축 레이블
+
+    plt.ylim(0,100)
+    plt.legend()
+
+    plt.show()
+
+    ''' #파이 그래프
+    labels = ["A", "B", "C", "D", "E", "F", "G", "NONE"]
+    ratio = [a.count(1) / len(a) * 100, b.count(1) / len(b) * 100, c.count(1) / len(c) * 100, d.count(1) / len(d) * 100,
+             e.count(1) / len(e) * 100, f.count(1) / len(f) * 100, g.count(1) / len(g) * 100,
+             none.count(1) / len(none) * 100]
+
+    plt.pie(ratio, labels=labels, autopct="%.1f%%")
+    '''
+    print(values)
 
 def Cabin_data(fn1,fn2):
     none=[]
@@ -680,13 +738,13 @@ if  __name__ == "__main__":
     #rap=read_csv()
     #rap2=parsing(rap)
     #save_csv(rap2)
-    d1=csv_connect1("SibSp.csv")
+    d1=csv_connect1("Cabin.csv")
     d2=csv_connect2()
-    #Cabin_data(d1,d2) #cabin 데이터
+    Cabin_data_Fix(d1,d2) #cabin 데이터
     #age_data(d1,d2) #age 데이터
     #embarked_data(d1,d2) #embarked 데이터
     #parch_data(d1,d2) #parch 데이터
     #fare_data(d1,d2) #fare 데이터
     #pclass_data(d1,d2) #pclass 데이터
     #sex_data(d1,d2) #sex 데이터
-    sibsp_data(d1,d2) #sibsp 데이터
+    #sibsp_data(d1,d2) #sibsp 데이터
