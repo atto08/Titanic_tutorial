@@ -740,6 +740,327 @@ def draw_suvem(csv_n):
     plt.ylabel('Count',size=12)
     plt.legend()
     plt.show()
+
+
+def dv_suvage(afn1,afn2):
+    none=[]
+    age0s=[]
+    age10s=[]
+    age20s=[]
+    age30s=[]
+    age40s=[]
+    age50s=[]
+    age60s=[]
+    age70s=[]
+    age80s=[]
+    age90s=[]
+
+    for i in range(0,891):
+        if afn1[i]=="":
+            afn1[i]=-1
+
+    Age_int = []
+    for i in afn1:
+        if i is not float:
+            Age_int.append(float(i))
+
+    for i in range(0,891):
+        if 0 <= Age_int[i] < 10:
+            if afn2[i] == "0":
+                age0s.append(0)
+            else:
+                age0s.append(1)
+        elif 10 <= Age_int[i] < 20:
+            if afn2[i] == "0":
+                age10s.append(0)
+            else:
+                age10s.append(1)
+        elif 20 <= Age_int[i] < 30:
+            if afn2[i] == "0":
+                age20s.append(0)
+            else:
+                age20s.append(1)
+        elif 30 <= Age_int[i] < 40:
+            if afn2[i] == "0":
+                age30s.append(0)
+            else:
+                age30s.append(1)
+        elif 40 <= Age_int[i] < 50:
+            if afn2[i] == "0":
+                age40s.append(0)
+            else:
+                age40s.append(1)
+        elif 50 <= Age_int[i] < 60:
+            if afn2[i] == "0":
+                age50s.append(0)
+            else:
+                age50s.append(1)
+        elif 60 <= Age_int[i] < 70:
+            if afn2[i] == "0":
+                age60s.append(0)
+            else:
+                age60s.append(1)
+        elif 70 <= Age_int[i] < 80:
+            if afn2[i] == "0":
+                age70s.append(0)
+            else:
+                age70s.append(1)
+        elif 80 <= Age_int[i] < 90:
+            if afn2[i] == "0":
+                age80s.append(0)
+            else:
+                age80s.append(1)
+        elif 90 <= Age_int[i] < 100:
+            if afn2[i] == "0":
+                age90s.append(0)
+            else:
+                age90s.append(1)
+        else:
+            if afn2[i] == "0":
+                none.append(0)
+            else:
+                none.append(1)
+
+    d_n = none.count(0)
+    d_0 = age0s.count(0)
+    d_10 = age10s.count(0)
+    d_20 = age20s.count(0)
+    d_30 = age30s.count(0)
+    d_40 = age40s.count(0)
+    d_50 = age50s.count(0)
+    d_60 = age60s.count(0)
+    d_70 = age70s.count(0)
+    d_80 = age80s.count(0)
+    d_90 = age90s.count(0)
+
+    s_n = none.count(1)
+    s_0 = age0s.count(1)
+    s_10 = age10s.count(1)
+    s_20 = age20s.count(1)
+    s_30 = age30s.count(1)
+    s_40 = age40s.count(1)
+    s_50 = age50s.count(1)
+    s_60 = age60s.count(1)
+    s_70 = age70s.count(1)
+    s_80 = age80s.count(1)
+    s_90 = age90s.count(1)
+
+    x = range(0,11)
+    #[s_n,s_0,s_10,s_20,s_30,s_40,s_50,s_60,s_70,s_80,s_90]
+    val = [d_n,d_0,d_10,d_20,d_30,d_40,d_50,d_60,d_70,d_80,d_90]
+    #['n','0s','10s','20s','30s','40s','50s','60s','70s','80s','90s']
+    kinds = ['N','C','10','20','30','40','50','60','70','80','90']
+    colors = ['brown','yellow','skyblue','blue','green','pink','red','purple','magenta','olive','orange']
+    leg = ['None', 'Children','10~19','20~29','30~39','40~49','50~59','60~69','70~79','80~89','90~99']
+    for i in range(len(kinds)):
+        plt.bar(x, val, color=colors[i], label=leg[i])
+    bar = plt.bar(x, val, color=colors)
+    for rect in bar:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2.0, height, height, ha="center", va="bottom", size=10)
+    plt.xticks(x,kinds)
+    plt.title("The number of Deaths by Age",size=15,color='r')
+    plt.xlabel('Ages',size=12)
+    plt.ylabel('Count',size=12)
+    plt.legend()
+    plt.show()
+
+
+    x = range(0,11)
+    val = [s_n,s_0,s_10,s_20,s_30,s_40,s_50,s_60,s_70,s_80,s_90]
+    kinds = ['N','C','10','20','30','40','50','60','70','80','90']
+    colors = ['brown','yellow','skyblue','blue','green','pink','red','purple','magenta','olive','orange']
+    leg = ['None', 'Children','10~19','20~29','30~39','40~49','50~59','60~69','70~79','80~89','90~99']
+    for i in range(len(kinds)):
+        plt.bar(x, val, color=colors[i], label=leg[i])
+    bar = plt.bar(x, val, color=colors)
+    for rect in bar:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2.0, height, height, ha="center", va="bottom", size=10)
+    plt.xticks(x,kinds)
+    plt.title("The number of Survivers by Age",size=15,color='b')
+    plt.xlabel('Ages',size=12)
+    plt.ylabel('Count',size=12)
+    plt.legend()
+    plt.show()
+
+
+def dv_suvfare(csv_n):
+    o = open(csv_n,'r',encoding='utf-8')
+    rd = csv.reader(o)
+
+    ret = []
+    survive = []
+    dead = []
+
+    s0 = []
+    s10 = []
+    s20 = []
+    s30 = []
+    s_over40 = []
+    d0 = []
+    d10 = []
+    d20 = []
+    d30 = []
+    d_over40 = []
+
+    for i in rd:
+        ret.append(i)
+    r_ret = ret[1:]
+    for j in r_ret:
+        if j[0] == '0':
+            dead.append(j[1])
+        else:
+            survive.append(j[1])
+
+    f_suv = IsFloatType(survive)
+    f_dead = IsFloatType(dead)
+
+    for k in f_suv:
+        if 0 <= k <= 10:
+            s0.append(k)
+        elif 10 < k <= 20:
+            s10.append(k)
+        elif 20 < k <= 30:
+            s20.append(k)
+        elif 30 < k <= 40:
+            s30.append(k)
+        else:
+            s_over40.append(k)
+
+    for l in f_dead:
+        if 0 <= l <= 10:
+            d0.append(l)
+        elif 10 < l <= 20:
+            d10.append(l)
+        elif 20 < l <= 30:
+            d20.append(l)
+        elif 30 < l <= 40:
+            d30.append(l)
+        else:
+            d_over40.append(l)
+
+    s_u10 = len(s0)
+    s_u20 = len(s10)
+    s_u30 = len(s20)
+    s_u40 = len(s30)
+    s_o40 = len(s_over40)
+    d_u10 = len(d0)
+    d_u20 = len(d10)
+    d_u30 = len(d20)
+    d_u40 = len(d30)
+    d_o40 = len(d_over40)
+
+
+    x = range(0,5)
+    #d_u10,d_u20,d_u30,d_u40,d_o40
+    val = [s_u10,s_u20,s_u30,s_u40,s_o40]
+    kinds = ['0~10','10~20','20~30','30~40','40↑']
+    kind2 = ['0~10$','10~20$','20~30$','30~40$','Over 40$']
+    colors = ['b','orange','yellow','green','brown']
+    for i in range(len(val)):
+        plt.bar(x, val, color=colors[i], label=kind2[i])
+    bar = plt.bar(x, val, color=colors)
+    for rect in bar:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2.0, height, height, ha="center", va="bottom", size=11)
+    plt.xticks(x,kinds)
+    plt.title("The number of Survivers by Fare",size=15,color='b')
+    plt.xlabel('Fare',size=12)
+    plt.ylabel('Count',size=12)
+    plt.legend()
+    plt.show()
+
+    x = range(0, 5)
+    #
+    val = [d_u10,d_u20,d_u30,d_u40,d_o40]
+    kinds = ['0~10','10~20','20~30','30~40','40↑']
+    kind2 = ['0~10$', '10~20$', '20~30$', '30~40$', 'Over 40$']
+    colors = ['b','orange','yellow','green','brown']
+    for i in range(len(val)):
+        plt.bar(x, val, color=colors[i], label=kind2[i])
+    bar = plt.bar(x, val, color=colors)
+    for rect in bar:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2.0, height, height, ha="center", va="bottom", size=11)
+    plt.xticks(x, kinds)
+    plt.title("The number of Deaths by Fare", size=15, color='r')
+    plt.xlabel('Fare', size=12)
+    plt.ylabel('Count', size=12)
+    plt.legend()
+    plt.show()
+
+
+
+def dv_suvem(csv_n):
+    o = open(csv_n,'r',encoding='utf-8')
+    rd = csv.reader(o)
+
+    ret = []
+    d_c = []
+    d_q = []
+    d_s = []
+    s_c = []
+    s_q = []
+    s_s = []
+    for i in rd:
+        ret.append(i)
+    r_ret = ret[1:]
+    for j in r_ret:
+        if j == ['0', 'C']:
+            d_c.append(-1)
+        elif j == ['0', 'Q']:
+            d_q.append(-2)
+        elif j == ['0', 'S']:
+            d_s.append(-3)
+        elif j == ['1', 'C']:
+            s_c.append(1)
+        elif j == ['1', 'Q']:
+            s_q.append(1)
+        else:
+            s_s.append(3)
+    d_cherb = len(d_c)
+    d_queen = len(d_q)
+    d_south = len(d_s)
+    s_cherb = len(s_c)
+    s_queen = len(s_q)
+    s_south = len(s_s)
+
+    x = range(0,3)
+    val = [s_cherb,s_queen,s_south]
+    kinds = ['C','Q','S']
+    colors = ['b','r','g']
+    ad = ['Cherbourg','Queenstown','Southampton']
+    for i in range(len(ad)):
+        plt.bar(x, val, color=colors[i], label=ad[i])
+    bar = plt.bar(x, val, color=colors)
+    for rect in bar:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2.0, height, height, ha="center", va="bottom", size=11)
+    plt.xticks(x,kinds)
+    plt.title("The number of Survivers by Embarked",size=15,color='b')
+    plt.xlabel('Embarked',size=12)
+    plt.ylabel('Count',size=12)
+    plt.legend()
+    plt.show()
+
+    x = range(0,3)
+    val = [d_cherb,d_queen,d_south]
+    kinds = ['C','Q','S']
+    colors = ['b','r','g']
+    ad = ['Cherbourg','Queenstown','Southampton']
+    for i in range(len(ad)):
+        plt.bar(x, val, color=colors[i], label=ad[i])
+    bar = plt.bar(x, val, color=colors)
+    for rect in bar:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2.0, height, height, ha="center", va="bottom", size=11)
+    plt.xticks(x,kinds)
+    plt.title("The number of Deaths by Embarked",size=15,color='r')
+    plt.xlabel('Embarked',size=12)
+    plt.ylabel('Count',size=12)
+    plt.legend()
+    plt.show()
 #생존 연결성 끝
 
 
@@ -748,14 +1069,17 @@ if __name__ == "__main__":
     pars = parsing(readd)
     # save_csv(pars)
     # u_save_csv(pars,'suvcab.csv',0,9)
-    # draw_graph('Age.csv','Pclass.csv')
+    # # draw_graph('Age.csv','Pclass.csv')
     draw_suvpc('suvpc.csv')
     draw_suvsx('suvsx.csv')
     d1 = csv_connect1("Age.csv")
     d2 = csv_connect2()
     draw_suvage(d1, d2)
+    dv_suvage(d1,d2)
     draw_suvsib('suvsib.csv')
     draw_suvpar('suvpar.csv')
     draw_suvfare('suvfare.csv')
+    dv_suvfare('suvfare.csv')
     draw_suvcab('suvcab.csv')
     draw_suvem('suvemb.csv')
+    dv_suvem('suvemb.csv')
