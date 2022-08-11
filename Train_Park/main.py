@@ -992,6 +992,108 @@ def dv_suvfare(csv_n):
 
 
 
+def dv_suvcab(csv_n):
+    o = open(csv_n,'r',encoding='utf-8')
+    rd = csv.reader(o)
+
+    ret = []
+    survive = []
+    dead = []
+
+    s_ca = []
+    s_cb = []
+    s_cc = []
+    s_cd = []
+    s_ce = []
+    s_cf = []
+    s_cg = []
+    s_none = []
+    d_ca = []
+    d_cb = []
+    d_cc = []
+    d_cd = []
+    d_ce = []
+    d_cf = []
+    d_cg = []
+    d_none = []
+
+    for i in rd:
+        ret.append(i)
+    r_ret = ret[1:]
+    for j in r_ret:
+        if j[0] == '0':
+            dead.append(j[1])
+        else:
+            survive.append(j[1])
+
+    for k in survive:
+        if k[:1] == 'A':
+            s_ca.append(k)
+        elif k[:1] == 'B':
+            s_cb.append(k)
+        elif k[:1] == 'C':
+            s_cc.append(k)
+        elif k[:1] == 'D':
+            s_cd.append(k)
+        elif k[:1] == 'E':
+            s_ce.append(k)
+        elif k[:1] == 'F':
+            s_cf.append(k)
+        elif k[:1] == 'G':
+            s_cg.append(k)
+        else:
+            s_none.append(-1)
+
+    for l in dead:
+        if l[:1] == 'A':
+            d_ca.append(l)
+        elif l[:1] == 'B':
+            d_cb.append(l)
+        elif l[:1] == 'C':
+            d_cc.append(l)
+        elif l[:1] == 'D':
+            d_cd.append(l)
+        elif l[:1] == 'E':
+            d_ce.append(l)
+        elif l[:1] == 'F':
+            d_cf.append(l)
+        elif l[:1] == 'G':
+            d_cg.append(l)
+        else:
+            d_none.append(-1)
+
+    SA = len(s_ca)
+    SB = len(s_cb)
+    SC = len(s_cc)
+    SD = len(s_cd)
+    SE = len(s_ce)
+    SF = len(s_cf)
+    SG = len(s_cg)
+    SN = len(s_none)
+    DA = len(d_ca)
+    DB = len(d_cb)
+    DC = len(d_cc)
+    DD = len(d_cd)
+    DE = len(d_ce)
+    DF = len(d_cf)
+    DG = len(d_cg)
+    DN = len(d_none)
+
+    x = range(0,8)
+    val = [SA,SB,SC,SD,SE,SF,SG,SN]
+    kinds = ['A','B','C','D','E','F','G','None']
+    colors = ['orange','yellow','magenta','blue','green','olive','purple','brown']
+    bar = plt.bar(x, val, color=colors)
+    for rect in bar:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2.0, height, height, ha="center", va="bottom", size=10)
+    plt.xticks(x,kinds)
+    plt.title("The number of Survivers by Cabin",size=15)
+    plt.xlabel('Cabin',size=12)
+    plt.ylabel('Count',size=12)
+    plt.show()
+
+
 def dv_suvem(csv_n):
     o = open(csv_n,'r',encoding='utf-8')
     rd = csv.reader(o)
@@ -1070,16 +1172,17 @@ if __name__ == "__main__":
     # save_csv(pars)
     # u_save_csv(pars,'suvcab.csv',0,9)
     # # draw_graph('Age.csv','Pclass.csv')
-    draw_suvpc('suvpc.csv')
-    draw_suvsx('suvsx.csv')
-    d1 = csv_connect1("Age.csv")
-    d2 = csv_connect2()
-    draw_suvage(d1, d2)
-    dv_suvage(d1,d2)
-    draw_suvsib('suvsib.csv')
-    draw_suvpar('suvpar.csv')
-    draw_suvfare('suvfare.csv')
-    dv_suvfare('suvfare.csv')
-    draw_suvcab('suvcab.csv')
-    draw_suvem('suvemb.csv')
-    dv_suvem('suvemb.csv')
+    # draw_suvpc('suvpc.csv')
+    # draw_suvsx('suvsx.csv')
+    # d1 = csv_connect1("Age.csv")
+    # d2 = csv_connect2()
+    # draw_suvage(d1, d2)
+    # dv_suvage(d1,d2)
+    # draw_suvsib('suvsib.csv')
+    # draw_suvpar('suvpar.csv')
+    # draw_suvfare('suvfare.csv')
+    # dv_suvfare('suvfare.csv')
+    # draw_suvcab('suvcab.csv')
+    dv_suvcab('suvcab.csv')
+    # draw_suvem('suvemb.csv')
+    # dv_suvem('suvemb.csv')
