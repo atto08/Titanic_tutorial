@@ -30,31 +30,8 @@ def save_csv(data2):
             f.close()
 
 def u_save_csv(p_data,csv_name,n,m):
-    labels = ['Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']
     with open(csv_name, "w", newline="") as f:
         writer = csv.writer(f)
-        if n == 0:
-            writer.writerow(labels[n:n+1])
-        elif n == 1:
-            writer.writerow(labels[n:n+1])
-        elif n == 2:
-            writer.writerow(labels[n:n+1])
-        elif n == 3:
-            writer.writerow(labels[n:n+1])
-        elif n == 4:
-            writer.writerow(labels[n:n+1])
-        elif n == 5:
-            writer.writerow(labels[n:n+1])
-        elif n == 6:
-            writer.writerow(labels[n:n+1])
-        elif n == 7:
-            writer.writerow(labels[n:n+1])
-        elif n == 8:
-            writer.writerow(labels[n:n+1])
-        elif n == 9:
-            writer.writerow(labels[n:n+1])
-        elif n == 10:
-            writer.writerow(labels[n:])
         for i in range(1,892):
             writer.writerows([[p_data[n][i],p_data[m][i]]])
         f.close()
@@ -67,8 +44,8 @@ def IsFloatType(params=[]):
         else:
             ret.append(float(param))
     return ret
-
-def draw_suvpc(csv_n):
+#그래프 그리기 시작.
+def draw_pclass(csv_n):
     o = open(csv_n,'r',encoding='utf-8')
     rd = csv.reader(o)
     ret = []
@@ -80,8 +57,7 @@ def draw_suvpc(csv_n):
     d3 = []
     for i in rd:
         ret.append(i)
-    r_ret = ret[1:]
-    for j in r_ret:
+    for j in ret:
         if j == ['0', '1']:
             d1.append(-1)
         elif j == ['0', '2']:
@@ -94,7 +70,6 @@ def draw_suvpc(csv_n):
             s1.append(1)
         else:
             s3.append(3)
-
     x = range(0,6)
     val = [len(s1),len(d1),len(s2),len(d2),len(s3),len(d3)]
     kinds = ['1st','1st','2nd','2nd','3rd','3rd']
@@ -113,33 +88,27 @@ def draw_suvpc(csv_n):
     plt.legend()
     plt.show()
 
-def draw_suvsx(csv_n):
+def draw_sex(csv_n):
     o = open(csv_n,'r',encoding='utf-8')
     rd = csv.reader(o)
     ret = []
-    zz = []
-    zo = []
-    oz = []
-    oo = []
+    d_m = []
+    d_f = []
+    s_m = []
+    s_f = []
     for i in rd:
         ret.append(i)
-    r_ret = ret[1:]
-    for j in r_ret:
+    for j in ret:
         if j == ['0', 'male']:
-            zz.append(1)
+            d_m.append(1)
         elif j == ['0', 'female']:
-            zo.append(2)
+            d_f.append(2)
         elif j == ['1', 'male']:
-            oz.append(3)
+            s_m.append(3)
         else:
-            oo.append(4)
-    d_men = len(zz)
-    d_women = len(zo)
-    s_men = len(oz)
-    s_women = len(oo)
-
+            s_f.append(4)
     x = range(0,4)
-    val = [s_men,d_men,s_women,d_women]
+    val = [len(s_m),len(d_m),len(s_f),len(d_f)]
     kinds = ['Men','Men','Women','Women']
     colors = ['b','r','b','r']
     ad = ['alive', 'dead']
@@ -156,7 +125,7 @@ def draw_suvsx(csv_n):
     plt.legend()
     plt.show()
 
-def draw_suvage(csv_n):
+def draw_age(csv_n):
     o = open(csv_n, 'r', encoding='utf-8')
     rd = csv.reader(o)
     ret = []
@@ -182,18 +151,15 @@ def draw_suvage(csv_n):
     d_age60s = []
     d_age70s = []
     d_age80s = []
-
     for i in rd:
         ret.append(i)
-    r_ret = ret[1:]
-    for j in r_ret:
+    for j in ret:
         if j[0] == '0':
             dead.append(j[1])
         else:
             survive.append(j[1])
     f_survive = IsFloatType(survive)
     f_dead = IsFloatType(dead)
-
     for k in f_survive:
         if k == -1:
             s_none.append(k)
@@ -215,7 +181,6 @@ def draw_suvage(csv_n):
             s_age70s.append(k)
         else:
             s_age80s.append(k)
-
     for l in f_dead:
         if l == -1:
             d_none.append(l)
@@ -237,7 +202,6 @@ def draw_suvage(csv_n):
             d_age70s.append(l)
         else:
             d_age80s.append(l)
-
     x = range(0,20)
     val = [len(s_none),len(s_child),len(s_age10s),len(s_age20s),len(s_age30s),len(s_age40s),len(s_age50s),len(s_age60s),len(s_age70s),len(s_age80s),
            len(d_none),len(d_child),len(d_age10s),len(d_age20s),len(d_age30s),len(d_age40s),len(d_age50s),len(d_age60s),len(d_age70s),len(d_age80s)]
@@ -258,7 +222,7 @@ def draw_suvage(csv_n):
     plt.legend()
     plt.show()
 
-def draw_suvsib(csv_n):
+def draw_sibsp(csv_n):
     o = open(csv_n,'r',encoding='utf-8')
     rd = csv.reader(o)
     ret = []
@@ -266,16 +230,13 @@ def draw_suvsib(csv_n):
     dead = []
     f_suv = []
     f_dead = []
-
     for i in rd:
         ret.append(i)
-    r_ret = ret[1:]
-    for j in r_ret:
+    for j in ret:
         if j[0] == '0':
             dead.append(j)
         else:
             survive.append(j)
-
     for k in survive:
         if k[1] == '0':
             f_suv.append(0)
@@ -285,7 +246,6 @@ def draw_suvsib(csv_n):
             f_suv.append(2)
         else:
             f_suv.append(3)
-
     for l in dead:
         if l[1] == '0':
             f_dead.append(0)
@@ -295,7 +255,6 @@ def draw_suvsib(csv_n):
             f_dead.append(2)
         else:
             f_dead.append(3)
-
     x = range(0,8)
     val = [f_suv.count(0),f_suv.count(1),f_suv.count(2),f_suv.count(3),f_dead.count(0),f_dead.count(1),f_dead.count(2),f_dead.count(3)]
     kinds = ['0','1','2','Over 3','0','1','2','Over 3']
@@ -315,7 +274,7 @@ def draw_suvsib(csv_n):
     plt.legend()
     plt.show()
 
-def draw_suvpar(csv_n):
+def draw_parch(csv_n):
     o = open(csv_n,'r',encoding='utf-8')
     rd = csv.reader(o)
     ret = []
@@ -323,16 +282,13 @@ def draw_suvpar(csv_n):
     dead = []
     f_suv = []
     f_dead = []
-
     for i in rd:
         ret.append(i)
-    r_ret = ret[1:]
-    for j in r_ret:
+    for j in ret:
         if j[0] == '0':
             dead.append(j)
         else:
             survive.append(j)
-
     for k in survive:
         if k[1] == '0':
             f_suv.append(0)
@@ -342,7 +298,6 @@ def draw_suvpar(csv_n):
             f_suv.append(2)
         else:
             f_suv.append(3)
-
     for l in dead:
         if l[1] == '0':
             f_dead.append(0)
@@ -352,7 +307,6 @@ def draw_suvpar(csv_n):
             f_dead.append(2)
         else:
             f_dead.append(3)
-
     x = range(0,8)
     val = [f_suv.count(0),f_suv.count(1),f_suv.count(2),f_suv.count(3),f_dead.count(0),f_dead.count(1),f_dead.count(2),f_dead.count(3)]
     kinds = ['0','1','2','Over 3','0','1','2','Over 3']
@@ -372,7 +326,7 @@ def draw_suvpar(csv_n):
     plt.legend()
     plt.show()
 
-def draw_suvfare(csv_n):
+def draw_fare(csv_n):
     o = open(csv_n,'r',encoding='utf-8')
     rd = csv.reader(o)
     ret = []
@@ -388,19 +342,15 @@ def draw_suvfare(csv_n):
     d20 = []
     d30 = []
     d_over40 = []
-
     for i in rd:
         ret.append(i)
-    r_ret = ret[1:]
-    for j in r_ret:
+    for j in ret:
         if j[0] == '0':
             dead.append(j[1])
         else:
             survive.append(j[1])
-
     f_suv = IsFloatType(survive)
     f_dead = IsFloatType(dead)
-
     for k in f_suv:
         if 0 <= k <= 10:
             s0.append(k)
@@ -412,7 +362,6 @@ def draw_suvfare(csv_n):
             s30.append(k)
         else:
             s_over40.append(k)
-
     for l in f_dead:
         if 0 <= l <= 10:
             d0.append(l)
@@ -424,7 +373,6 @@ def draw_suvfare(csv_n):
             d30.append(l)
         else:
             d_over40.append(l)
-
     x = range(0,10)
     val = [len(s0),len(s10),len(s20),len(s30),len(s_over40),len(d0),len(d10),len(d20),len(d30),len(d_over40)]
     kinds = ['0~10','10~20','20~30','30~40','40↑','0~10','10~20','20~30','30~40','40↑']
@@ -444,7 +392,7 @@ def draw_suvfare(csv_n):
     plt.legend()
     plt.show()
 
-def draw_suvcab(csv_n):
+def draw_cabin(csv_n):
     o = open(csv_n,'r',encoding='utf-8')
     rd = csv.reader(o)
     ret = []
@@ -466,16 +414,13 @@ def draw_suvcab(csv_n):
     d_f = []
     d_g = []
     d_n = []
-
     for i in rd:
         ret.append(i)
-    r_ret = ret[1:]
-    for j in r_ret:
+    for j in ret:
         if j[0] == '0':
             dead.append(j[1])
         else:
             survive.append(j[1])
-
     for k in survive:
         if k[:1] == 'A':
             s_a.append(k)
@@ -493,7 +438,6 @@ def draw_suvcab(csv_n):
             s_g.append(k)
         else:
             s_n.append(-1)
-
     for l in dead:
         if l[:1] == 'A':
             d_a.append(l)
@@ -511,7 +455,6 @@ def draw_suvcab(csv_n):
             d_g.append(l)
         else:
             d_n.append(-1)
-
     x = range(0,16)
     val = [len(s_a),len(s_b),len(s_c),len(s_d),len(s_e),len(s_f),len(s_g),len(s_n),len(d_a),len(d_b),len(d_c),len(d_d),len(d_e),len(d_f),len(d_g),len(d_n)]
     kinds = ['A','B','C','D','E','F','G','None','A','B','C','D','E','F','G','None']
@@ -531,7 +474,7 @@ def draw_suvcab(csv_n):
     plt.legend()
     plt.show()
 
-def draw_suvem(csv_n):
+def draw_embarked(csv_n):
     o = open(csv_n,'r',encoding='utf-8')
     rd = csv.reader(o)
     ret = []
@@ -543,8 +486,7 @@ def draw_suvem(csv_n):
     s_s = []
     for i in rd:
         ret.append(i)
-    r_ret = ret[1:]
-    for j in r_ret:
+    for j in ret:
         if j == ['0', 'C']:
             d_c.append(-1)
         elif j == ['0', 'Q']:
@@ -557,7 +499,6 @@ def draw_suvem(csv_n):
             s_q.append(1)
         else:
             s_s.append(3)
-
     x = range(0,6)
     val = [len(s_c),len(d_c),len(s_q),len(d_q),len(s_s),len(d_s)]
     kinds = ['<Cher','bourg>','<Queen','stown>','<South','ampton>']
@@ -582,11 +523,11 @@ if __name__ == "__main__":
     # save_csv(pars)
     # u_save_csv(pars,'sEmbarked.csv',0,10)
     # # draw_graph('Age.csv','Pclass.csv')
-    # draw_suvpc('suvpc.csv')
-    # draw_suvsx('suvsx.csv')
-    draw_suvage('sAge.csv')
-    # draw_suvsib('suvsib.csv')
-    # draw_suvpar('suvpar.csv')
-    # draw_suvfare('suvfare.csv')
-    # draw_suvcab('suvcab.csv')
-    # draw_suvem('suvemb.csv')
+    draw_pclass('sPclass.csv')
+    draw_sex('sSex.csv')
+    draw_age('sAge.csv')
+    draw_sibsp('sSibsp.csv')
+    draw_parch('sParch.csv')
+    draw_fare('sFare.csv')
+    draw_cabin('sCabin.csv')
+    draw_embarked('sEmbarked.csv')
