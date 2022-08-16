@@ -112,13 +112,8 @@ def Cabin_data(fn1,fn2):
 
     plt.show()
 
-
-
-
 def age_data(afn1,afn2):
-    a_file=[[],[],[],[],[],[],[],[],[]] #none~80
-    #max(afn1) #max 80
-
+    a_file=[[],[],[],[],[],[],[],[],[],[]] #none~90
 
     for i in range(0,891):
         if afn1[i]=="":
@@ -129,32 +124,32 @@ def age_data(afn1,afn2):
         if i is not float:
             Age_int.append(float(i))
 
-    for i in range(0,891):
-        for n in range(0,9):
-            for j in range(0,80,10):
-                k=j+10
-                if j <= Age_int[i] <= k :
-                    if afn2[i] == 0:
-                        a_file[n].append(0)
-                    else:
-                        a_file[n].append(1)
+    for l in range(0,891):
+        for j in range(0,81,10):
+            k = j + 10
+            n = j / 10
+            m = int(n)
+
+            if j <= Age_int[l] < k:
+                if afn2[l] == 0:
+                    a_file[m].append(0)
                 else:
-                    if afn2[i] == 0:
-                        a_file[0].append(0)
-                    else:
-                        a_file[0].append(1)
+                    a_file[m].append(1)
+
+            elif Age_int[l] == -1:
+                if afn2[l] == 0:
+                    a_file[9].append(0)
+                else:
+                    a_file[9].append(1)
 
 
-    print(a_file)
-
-    '''
-    x = np.arange(8)  # x값 개수
-    Pc = ["0-10","11-20","21-30","31-40","41-50","51-60","61-70","71-80"]  # x값
-    values = [a0_10.count(1) / len(a0_10) * 100, a11_20.count(1) / len(a11_20) * 100, a21_30.count(1) / len(a21_30) * 100,
-              a31_40.count(1) / len(a31_40) * 100,a41_50.count(1) / len(a41_50) * 100, a51_60.count(1) / len(a51_60) * 100,
-              a61_70.count(1) / len(a61_70) * 100,a71_80.count(1) / len(a71_80)]  # y값
+    x = np.arange(9)  # x값 개수
+    Pc = ["0-9","10-19","20-29","30-39","40-49","50-59","60-69","70-79","80-89"]  # x값
+    values = [a_file[0].count(1)/len(a_file[0])*100, a_file[1].count(1) / len(a_file[1]) * 100, a_file[2].count(1) / len(a_file[2]) * 100, a_file[3].count(1) / len(a_file[3]) * 100,
+              a_file[4].count(1) / len(a_file[4]) * 100,a_file[5].count(1) / len(a_file[5]) * 100, a_file[6].count(1) / len(a_file[6]) * 100,
+              a_file[7].count(1) / len(a_file[7]) * 100,a_file[8].count(1) / len(a_file[8])*100]  # y값
     colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown",
-              "tab:pink", "tab:gray"]  # 막대 컬러
+              "tab:pink", "tab:gray", "tab:olive"]  # 막대 컬러
     for i in range(len(Pc)):
         plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
     plt.xticks(x, Pc)  # x를 순서대로 나열
@@ -173,8 +168,8 @@ def age_data(afn1,afn2):
     plt.legend()
 
     plt.show()
-    '''
 
+    print(len(a_file[9]))
 
 
 
