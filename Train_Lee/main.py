@@ -53,73 +53,44 @@ def csv_connect2():
     file2 = csv.reader(o2)
 
     survive_file = []
+
     for i in file2:
         for j in i:
             survive_file.append(j)
     survive_file.pop(0)
 
-    return survive_file
+    s_file = []
 
+    for i in survive_file:
+        for j in i:
+            if j is not int:
+                s_file.append(int(j))
+
+    return s_file
 
 def Cabin_data(fn1,fn2):
-    none=[]
-    a=[]
-    b=[]
-    c=[]
-    d=[]
-    e=[]
-    f=[]
-    g=[]
+    c_file=[[],[],[],[],[],[],[],[]] #none~g
+    c_dict={0:"n", 1:"A", 2:"B",3:"C",4:"D",5:"E",6:"F",7:"G"}
+
     for i in range(0,891):
         if fn1[i] == "":
             fn1[i] = "none"
 
-    for i in range(0,891):
-        if fn1[i][0] == "A":
-            if fn2[i] == "0":
-                a.append(0)
-            else:
-                a.append(1)
-        elif fn1[i][0] == "B":
-            if fn2[i] == "0":
-                b.append(0)
-            else:
-                b.append(1)
-        elif fn1[i][0] == "C":
-            if fn2[i] == "0":
-                c.append(0)
-            else:
-                c.append(1)
-        elif fn1[i][0] == "D":
-            if fn2[i] == "0":
-                d.append(0)
-            else:
-                d.append(1)
-        elif fn1[i][0] == "E":
-            if fn2[i] == "0":
-                e.append(0)
-            else:
-                e.append(1)
-        elif fn1[i][0] == "F":
-            if fn2[i] == "0":
-                f.append(0)
-            else:
-                f.append(1)
-        elif fn1[i][0] == "G":
-            if fn2[i] == "0":
-                g.append(0)
-            else:
-                g.append(1)
-        elif fn1[i] == "none":
-            if fn2[i] == "0":
-                none.append(0)
-            else:
-                none.append(1)
+    for k in range(0,891):
+        for j in range(0,8):
+            if fn1[k][0] == c_dict[j]:
+                if fn2[k] == 0:
+                    c_file[j].append(0)
+                else:
+                    c_file[j].append(1)
+
+    for a in range(0,7):
+        print(len(c_file[a]))
 
     x = np.arange(8) #x값 개수
     Pc = ["A", "B", "C", "D", "E", "F", "G", "NONE"] #x값
-    values = [a.count(1)/len(a)*100,b.count(1)/len(b)*100,c.count(1)/len(c)*100,d.count(1)/len(d)*100,
-              e.count(1)/len(e)*100,f.count(1)/len(f)*100,g.count(1)/len(g)*100,none.count(1)/len(none)*100] #y값
+    values = [c_file[1].count(1)/len(c_file[1])*100,c_file[2].count(1)/len(c_file[2])*100,c_file[3].count(1)/len(c_file[3])*100,c_file[4].count(1)/len(c_file[4])*100,
+              c_file[5].count(1)/len(c_file[5])*100,c_file[6].count(1)/len(c_file[6])*100,c_file[7].count(1)/len(c_file[7])*100,c_file[0].count(1)/len(c_file[0])*100] #y값
     colors = ["tab:blue","tab:orange","tab:green","tab:red","tab:purple","tab:brown","tab:pink"
               ,"tab:gray"] #막대 컬러
     for i in range(len(Pc)):
@@ -141,30 +112,13 @@ def Cabin_data(fn1,fn2):
 
     plt.show()
 
-    ''' #파이 그래프
-    labels = ["A", "B", "C", "D", "E", "F", "G", "NONE"]
-    ratio = [a.count(1) / len(a) * 100, b.count(1) / len(b) * 100, c.count(1) / len(c) * 100, d.count(1) / len(d) * 100,
-             e.count(1) / len(e) * 100, f.count(1) / len(f) * 100, g.count(1) / len(g) * 100,
-             none.count(1) / len(none) * 100]
 
-    plt.pie(ratio, labels=labels, autopct="%.1f%%")
-    '''
-
-    print(len(a),len(b),len(c),len(d),len(e),len(f),len(g),len(none))
 
 
 def age_data(afn1,afn2):
-    none=[]
-    a0_10=[]
-    a11_20=[]
-    a21_30=[]
-    a31_40=[]
-    a41_50=[]
-    a51_60=[]
-    a61_70=[]
-    a71_80=[]
-
+    a_file=[[],[],[],[],[],[],[],[],[]] #none~80
     #max(afn1) #max 80
+
 
     for i in range(0,891):
         if afn1[i]=="":
@@ -174,55 +128,26 @@ def age_data(afn1,afn2):
     for i in afn1:
         if i is not float:
             Age_int.append(float(i))
+
     for i in range(0,891):
-        if 0 <= Age_int[i] <= 10:
-            if afn2[i] == "0":
-                a0_10.append(0)
-            else:
-                a0_10.append(1)
-        elif 11 <= Age_int[i] <= 20:
-            if afn2[i] == "0":
-                a11_20.append(0)
-            else:
-                a11_20.append(1)
-        elif 21 <= Age_int[i] <= 30:
-            if afn2[i] == "0":
-                a21_30.append(0)
-            else:
-                a21_30.append(1)
-        elif 31 <= Age_int[i] <= 40:
-            if afn2[i] == "0":
-                a31_40.append(0)
-            else:
-                a31_40.append(1)
-        elif 41 <= Age_int[i] <= 50:
-            if afn2[i] == "0":
-                a41_50.append(0)
-            else:
-                a41_50.append(1)
-        elif 51 <= Age_int[i] <= 60:
-            if afn2[i] == "0":
-                a51_60.append(0)
-            else:
-                a51_60.append(1)
-        elif 61 <= Age_int[i] <= 70:
-            if afn2[i] == "0":
-                a61_70.append(0)
-            else:
-                a71_80.append(1)
-        elif 71 <= Age_int[i] <= 80:
-            if afn2[i] == "0":
-                a71_80.append(0)
-            else:
-                a71_80.append(1)
-        else:
-            if afn2[i] == "0":
-                none.append(0)
-            else:
-                none.append(1)
+        for n in range(0,9):
+            for j in range(0,80,10):
+                k=j+10
+                if j <= Age_int[i] <= k :
+                    if afn2[i] == 0:
+                        a_file[n].append(0)
+                    else:
+                        a_file[n].append(1)
+                else:
+                    if afn2[i] == 0:
+                        a_file[0].append(0)
+                    else:
+                        a_file[0].append(1)
 
-    print(len(a0_10), len(a11_20), len(a21_30), len(a31_40), len(a41_50), len(a51_60), len(a61_70), len(a71_80),len(none))
 
+    print(a_file)
+
+    '''
     x = np.arange(8)  # x값 개수
     Pc = ["0-10","11-20","21-30","31-40","41-50","51-60","61-70","71-80"]  # x값
     values = [a0_10.count(1) / len(a0_10) * 100, a11_20.count(1) / len(a11_20) * 100, a21_30.count(1) / len(a21_30) * 100,
@@ -248,7 +173,7 @@ def age_data(afn1,afn2):
     plt.legend()
 
     plt.show()
-
+    '''
 
 
 
@@ -679,10 +604,10 @@ if  __name__ == "__main__":
     #rap=read_csv()
     #rap2=parsing(rap)
     #save_csv(rap2)
-    d1=csv_connect1("Cabin.csv")
+    d1=csv_connect1("Age.csv")
     d2=csv_connect2()
-    Cabin_data(d1,d2) #cabin 데이터
-    #age_data(d1,d2) #age 데이터
+    #Cabin_data(d1,d2) #cabin 데이터
+    age_data(d1,d2) #age 데이터
     #embarked_data(d1,d2) #embarked 데이터
     #parch_data(d1,d2) #parch 데이터
     #fare_data(d1,d2) #fare 데이터
