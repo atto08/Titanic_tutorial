@@ -36,6 +36,7 @@ def save_csv(data2):
 
             f.close()
 
+
 def csv_connect1(file_name1):
     o1 = open(file_name1, "r", encoding="utf-8")
     file1 = csv.reader(o1)
@@ -124,32 +125,34 @@ def age_data(afn1,afn2):
         if i is not float:
             Age_int.append(float(i))
 
-    for l in range(0,891):
+    for i in range(0,891):
         for j in range(0,81,10):
             k = j + 10
             n = j / 10
             m = int(n)
 
-            if j <= Age_int[l] < k:
-                if afn2[l] == 0:
+            if j <= Age_int[i] < k:
+                if afn2[i] == 0:
                     a_file[m].append(0)
                 else:
                     a_file[m].append(1)
 
-            elif Age_int[l] == -1:
-                if afn2[l] == 0:
-                    a_file[9].append(0)
-                else:
-                    a_file[9].append(1)
+        if Age_int[i] == -1:
+            if afn2[i] == 0:
+                a_file[9].append(0)
+            else:
+                a_file[9].append(1)
 
+    for i in range(0,10):
+        print(len(a_file[i]))
 
-    x = np.arange(9)  # x값 개수
-    Pc = ["0-9","10-19","20-29","30-39","40-49","50-59","60-69","70-79","80-89"]  # x값
+    x = np.arange(10)  # x값 개수
+    Pc = ["0-10","10-20","20-30","30-40","40-50","50-60","60-70","70-80","80-90","none"]  # x값
     values = [a_file[0].count(1)/len(a_file[0])*100, a_file[1].count(1) / len(a_file[1]) * 100, a_file[2].count(1) / len(a_file[2]) * 100, a_file[3].count(1) / len(a_file[3]) * 100,
               a_file[4].count(1) / len(a_file[4]) * 100,a_file[5].count(1) / len(a_file[5]) * 100, a_file[6].count(1) / len(a_file[6]) * 100,
-              a_file[7].count(1) / len(a_file[7]) * 100,a_file[8].count(1) / len(a_file[8])*100]  # y값
+              a_file[7].count(1) / len(a_file[7]) * 100,a_file[8].count(1) / len(a_file[8])*100, a_file[9].count(1) / len(a_file[9])*100]  # y값
     colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown",
-              "tab:pink", "tab:gray", "tab:olive"]  # 막대 컬러
+              "tab:pink", "tab:gray", "tab:olive","tab:cyan"]  # 막대 컬러
     for i in range(len(Pc)):
         plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
     plt.xticks(x, Pc)  # x를 순서대로 나열
@@ -169,38 +172,31 @@ def age_data(afn1,afn2):
 
     plt.show()
 
-    print(len(a_file[9]))
-
-
-
 def embarked_data(efn1,efn2):
-    c=[]
-    q=[]
-    s=[]
+    e_file = [[], [], [], []]  # C, Q, S, none
+    e_dict = {0: "C", 1: "Q", 2: "S"}
 
-    for i in range(0,891):
-        if efn1[i] == "S":
-            if efn2[i] =="0":
-                s.append(0)
-            else:
-                s.append(1)
-        elif efn1[i] == "C":
-            if efn2[i] =="0":
-                c.append(0)
-            else:
-                c.append(1)
-        else:
-            if efn2[i] == "0":
-                q.append(0)
-            else:
-                q.append(1)
+    for i in range(0, 891):
+        for j in range(0, 3):
+            if efn1[i] == e_dict[j]:
+                if efn2[i] == 0:
+                    e_file[j].append(0)
+                else:
+                    e_file[j].append(1)
 
-    print(len(c), len(q), len(s))
+    for i in range(0, 891):
+        if efn1[i] == "":
+            if efn2[i] ==0:
+                e_file[3].append(0)
+            else:
+                e_file[3].append(0)
+
+
 
     x = np.arange(3)  # x값 개수
     Pc = ["C", "Q", "S"]  # x값
-    values = [c.count(1) / len(c) * 100, q.count(1) / len(q) * 100,
-              s.count(1) / len(s) * 100]
+    values = [e_file[0].count(1) / len(e_file[0]) * 100, e_file[1].count(1) / len(e_file[1]) * 100,
+              e_file[2].count(1) / len(e_file[2]) * 100]
 
     colors = ["tab:blue", "tab:orange", "tab:green"]  # 막대 컬러
     for i in range(len(Pc)):
@@ -222,63 +218,34 @@ def embarked_data(efn1,efn2):
 
     plt.show()
 
+    print(len(e_file[0]),len(e_file[1]),len(e_file[2]),len(e_file[3]))
+
 def parch_data(pfn1,pfn2):
     #max(pfn1) #6
-    par0=[]
-    par1=[]
-    par2=[]
-    par3=[]
-    par4=[]
-    par5=[]
-    par6=[]
+    p_file=[[],[],[],[],[],[],[]] #0~6
+    p_int=[]
+
+    for n in range(0,891):
+        if pfn1[n] is not int:
+            p_int.append(int(pfn1[n]))
 
     for i in range(0,891):
-        if pfn1[i] == "0":
-            if pfn2[i] == "0":
-                par0.append(0)
-            else:
-                par0.append(1)
+        for j in range(0,7):
+            if p_int[i] == j:
+                if pfn2[i] == 0:
+                    p_file[j].append(0)
+                else:
+                    p_file[j].append(1)
 
-        elif pfn1[i] == "1":
-            if pfn2[i] == "0":
-                par1.append(0)
-            else:
-                par1.append(1)
+    for i in range(0,7):
+        print(len(p_file[i]))
 
-        elif pfn1[i] == "2":
-            if pfn2[i] == "0":
-                par2.append(0)
-            else:
-                par2.append(1)
-
-        elif pfn1[i] == "3":
-            if pfn2[i] == "0":
-                par3.append(0)
-            else:
-                par3.append(1)
-        elif pfn1[i] == "4":
-            if pfn2[4] == "0":
-                par4.append(0)
-            else:
-                par4.append(1)
-        elif pfn1[i] == "5":
-            if pfn2[i] == "0":
-                par5.append(0)
-            else:
-                par5.append(1)
-        elif pfn1[i] == "6":
-            if pfn2[i] == "0":
-                par6.append(0)
-            else:
-                par6.append(1)
-
-    print(len(par0), len(par1), len(par2),len(par3),len(par4), len(par5), len(par6))
 
     x = np.arange(7)  # x값 개수
     Pc = ["0","1","2","3","4","5","6"]  # x값
-    values = [par0.count(1) / len(par0) * 100, par1.count(1) / len(par1) * 100,
-              par2.count(1) / len(par2) * 100, par3.count(1) / len(par3) * 100, par4.count(1) / len(par4) * 100,
-              par5.count(1) / len(par5) * 100, par6.count(1) / len(par6) * 100]
+    values = [p_file[0].count(1) / len(p_file[0]) * 100, p_file[1].count(1) / len(p_file[1]) * 100,
+              p_file[2].count(1) / len(p_file[2]) * 100, p_file[3].count(1) / len(p_file[3]) * 100, p_file[4].count(1) / len(p_file[4]) * 100,
+              p_file[5].count(1) / len(p_file[5]) * 100, p_file[6].count(1) / len(p_file[6]) * 100]
 
     colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown",
               "tab:pink"]  # 막대 컬러
@@ -301,90 +268,40 @@ def parch_data(pfn1,pfn2):
     plt.legend()
 
     plt.show()
+
 def fare_data(ffn1,ffn2):
-    #(max(ffn1)) #최댓값 93.5
-
-    f0_10=[]
-    f11_20=[]
-    f21_30=[]
-    f31_40=[]
-    f41_50=[]
-    f51_60=[]
-    f61_70=[]
-    f71_80=[]
-    f81_90=[]
-    f91_100=[]
-
+    f_file=[[],[],[],[],[],[]] #0~50,50이상
     fare_f=[]
 
     for i in ffn1:
         if i is not float:
             fare_f.append(float(i))
 
+    for i in range(0, 891):
+        for j in range(0, 41, 10):
+            k = j + 10
+            n = j / 10
+            m = int(n)
+
+            if j <= fare_f[i] < k:
+                if ffn2[i] == 0:
+                    f_file[m].append(0)
+                else:
+                    f_file[m].append(1)
     for i in range(0,891):
-        if 0 <= fare_f[i] <= 10:
-            if ffn2[i] == "0":
-                f0_10.append(0)
+        if 50 <= fare_f[i]:
+            if ffn2[i] == 0:
+                f_file[5].append(0)
             else:
-                f0_10.append(1)
-        elif 11 <= fare_f[i] <= 20:
-            if ffn2[i] == "0":
-                f11_20.append(0)
-            else:
-                f11_20.append(1)
-        elif 21 <= fare_f[i] <= 30:
-            if ffn2[i] == "0":
-                f21_30.append(0)
-            else:
-                f21_30.append(1)
-        elif 31 <= fare_f[i] <= 40:
-            if ffn2[i] == "0":
-                f31_40.append(0)
-            else:
-                f31_40.append(1)
-        elif 41 <= fare_f[i] <= 50:
-            if ffn2[i] == "0":
-                f41_50.append(0)
-            else:
-                f41_50.append(1)
-        elif 51 <= fare_f[i] <= 60:
-            if ffn2[i] == "0":
-                f51_60.append(0)
-            else:
-                f51_60.append(1)
-        elif 61 <=fare_f[i] <= 70:
-            if ffn2[i] == "0":
-                f61_70.append(0)
-            else:
-                f71_80.append(1)
-        elif 71 <= fare_f[i] <= 80:
-            if ffn2[i] == "0":
-                f71_80.append(0)
-            else:
-                f71_80.append(1)
-        elif 81 <= fare_f[i] <= 90:
-            if ffn2[i] == "0":
-                f81_90.append(0)
-            else:
-                f81_90.append(1)
-        elif 91 <= fare_f[i] <= 100:
-            if ffn2[i] == "0":
-                f91_100.append(0)
-            else:
-                f91_100.append(1)
+                f_file[5].append(1)
 
-    print(len(f0_10), len(f11_20), len(f21_30), len(f31_40), len(f41_50), len(f51_60), len(f61_70),
-          len(f71_80), len(f81_90), len(f91_100))
 
-    x = np.arange(10)  # x값 개수
-    Pc = ["0-10","11-20","21-30","31-40","41-50","51-60","61-70","71-80","81-90","91-100"]  # x값
-    values = [f0_10.count(1) / len(f0_10) * 100, f11_20.count(1) / len(f11_20) * 100,
-              f21_30.count(1) / len(f21_30) * 100, f31_40.count(1) / len(f31_40) * 100, f41_50.count(1) / len(f41_50) * 100,
-              f51_60.count(1) / len(f51_60) * 100, f61_70.count(1) / len(f61_70) * 100, f71_80.count(1) / len(f71_80) * 100,
-              f81_90.count(1) / len(f81_90) * 100, f91_100.count(1) / len(f91_100) * 100]
-
-    colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown",
-              "tab:pink", "tab:gray", "tab:olive", "tab:cyan"]  # 막대 컬러
+    x = np.arange(6)  # x값 개수
+    Pc = ["0-10","11-20","21-30","31-40","41-50","over_50"]  # x값
+    values = [f_file[0].count(1) / len(f_file[0]) * 100, f_file[1].count(1) / len(f_file[1]) * 100,
+              f_file[2].count(1) / len(f_file[2]) * 100, f_file[3].count(1) / len(f_file[3]) * 100, f_file[4].count(1) / len(f_file[4]) * 100,
+              f_file[5].count(1) / len(f_file[5]) * 100]
+    colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown"]  # 막대 컬러
 
     for i in range(len(Pc)):
         plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
@@ -404,40 +321,33 @@ def fare_data(ffn1,ffn2):
     plt.legend()
 
     plt.show()
+    for i in range(0,6):
+        print(len(f_file[i]))
 
 def pclass_data(ppfn1,ppfn2):
-    pclass_i=[]
-    pc0=[]
-    pc1=[]
-    pc2=[]
-    pc3=[]
+    p_file=[[],[],[]] #1,2,3
+    p_dict={0:1,1:2,2:3}
+    pclass_int=[]
+
+
 
     for i in ppfn1:
         if i is not int:
-            pclass_i.append(int(i))
+            pclass_int.append(int(i))
 
     for i in range(0,891):
-        if pclass_i[i]==1:
-            if ppfn2[i] == "0":
-                pc1.append(0)
-            else:
-                pc1.append(1)
-        elif pclass_i[i]==2:
-            if ppfn2[i] == "0":
-                pc2.append(0)
-            else:
-                pc2.append(1)
-        elif pclass_i[i]==3:
-            if ppfn2[i] == "0":
-                pc3.append(0)
-            else:
-                pc3.append(1)
-    print(len(pc1),len(pc2),len(pc3))
+        for j in range(0,3):
+            if pclass_int[i] == p_dict[j]:
+                if ppfn2[i] == 0:
+                    p_file[j].append(0)
+                else:
+                    p_file[j].append(1)
+
 
     x = np.arange(3)  # x값 개수
     Pc = ["1","2","3"]  # x값
-    values = [pc1.count(1) / len(pc1) * 100,
-              pc2.count(1) / len(pc2) * 100, pc3.count(1) / len(pc3) * 100]
+    values = [p_file[0].count(1) / len(p_file[0]) * 100,
+              p_file[1].count(1) / len(p_file[1]) * 100, p_file[2].count(1) / len(p_file[2])*100]
 
     colors = ["tab:blue", "tab:orange", "tab:green"]  # 막대 컬러
 
@@ -459,6 +369,10 @@ def pclass_data(ppfn1,ppfn2):
     plt.legend()
 
     plt.show()
+
+    for i in range(0,2):
+        print(p_file[i])
+
 def sex_data(sfn1,sfn2):
     male=[]
     female=[]
@@ -502,74 +416,27 @@ def sex_data(sfn1,sfn2):
     plt.show()
 def sibsp_data(ssfn1,ssfn2):
     #max(ssfn1) #max8
-    sib0=[]
-    sib1=[]
-    sib2=[]
-    sib3=[]
-    sib4=[]
-    sib5=[]
-    sib6=[]
-    sib7=[]
-    sib8=[]
+    s_file=[[],[],[],[],[],[],[],[],[]] #0~8
 
-    sibsp_i=[]
+    sibsp_int=[]
     for i in ssfn1:
         if i is not int:
-            sibsp_i.append(int(i))
+            sibsp_int.append(int(i))
 
     for i in range(0,891):
-        if sibsp_i[i] == 0:
-            if ssfn2[i] == "0":
-                sib0.append(0)
-            else:
-                sib0.append(1)
-        elif sibsp_i[i] == 1:
-            if ssfn2[i] == "0":
-                sib1.append(0)
-            else:
-                sib1.append(1)
-        elif sibsp_i[i] == 2:
-            if ssfn2[i] == "0":
-                sib2.append(0)
-            else:
-                sib2.append(1)
-        elif sibsp_i[i] == 3:
-            if ssfn2[i] == "0":
-                sib3.append(0)
-            else:
-                sib3.append(1)
-        elif sibsp_i[i] == 4:
-            if ssfn2[i] == "0":
-                sib4.append(0)
-            else:
-                sib4.append(1)
-        elif sibsp_i[i] == 5:
-            if ssfn2[i] == "0":
-                sib5.append(0)
-            else:
-                sib5.append(1)
-        elif sibsp_i[i] == 6:
-            if ssfn2[i] == "0":
-                sib6.append(0)
-            else:
-                sib6.append(1)
-        elif sibsp_i[i] == 7:
-            if ssfn2[i] == "0":
-                sib7.append(0)
-            else:
-                sib7.append(1)
-        elif sibsp_i[i] == 8:
-            if ssfn2[i] == "0":
-                sib8.append(0)
-            else:
-                sib8.append(1)
-    print(len(sib0),len(sib1),len(sib2),len(sib3),len(sib4),len(sib5),len(sib6),len(sib7),len(sib8))
+        for j in range(0,9):
+            if sibsp_int[i] == j:
+                if ssfn2[i] == 0:
+                    s_file[j].append(0)
+                else:
+                    s_file[j].append(1)
+
 
     x = np.arange(9)  # x값 개수
     Pc = ["0","1","2","3","4","5","6","7","8"]  # x값
-    values = [sib0.count(1) / len(sib0) * 100, sib1.count(1) / len(sib1) * 100, sib2.count(1) / len(sib2) * 100,
-              sib3.count(1) / len(sib3) * 100, sib4.count(1) / len(sib4) * 100, sib5.count(1) / len(sib5) * 100,
-              0.0, 0.0, sib8.count(1) / len(sib8) * 100]
+    values = [s_file[0].count(1) / len(s_file[0]) * 100, s_file[1].count(1) / len(s_file[1]) * 100, s_file[2].count(1) / len(s_file[2]) * 100,
+              s_file[3].count(1) / len(s_file[3]) * 100, s_file[4].count(1) / len(s_file[4]) * 100, s_file[5].count(1) / len(s_file[5]) * 100,
+              0,0, s_file[8].count(1) / len(s_file[8]) * 100]
 
     colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown",
               "tab:pink", "tab:gray", "tab:olive"]  # 막대 컬러
@@ -593,7 +460,8 @@ def sibsp_data(ssfn1,ssfn2):
 
     plt.show()
 
-
+    for i in range(0,9):
+        print(len(s_file[i]))
 
 if  __name__ == "__main__":
     #rap=read_csv()
