@@ -36,7 +36,6 @@ def save_csv(data2):
 
             f.close()
 
-
 def csv_connect1(file_name1):
     o1 = open(file_name1, "r", encoding="utf-8")
     file1 = csv.reader(o1)
@@ -191,8 +190,6 @@ def embarked_data(efn1,efn2):
             else:
                 e_file[3].append(0)
 
-
-
     x = np.arange(3)  # x값 개수
     Pc = ["C", "Q", "S"]  # x값
     values = [e_file[0].count(1) / len(e_file[0]) * 100, e_file[1].count(1) / len(e_file[1]) * 100,
@@ -239,7 +236,6 @@ def parch_data(pfn1,pfn2):
 
     for i in range(0,7):
         print(len(p_file[i]))
-
 
     x = np.arange(7)  # x값 개수
     Pc = ["0","1","2","3","4","5","6"]  # x값
@@ -295,7 +291,6 @@ def fare_data(ffn1,ffn2):
             else:
                 f_file[5].append(1)
 
-
     x = np.arange(6)  # x값 개수
     Pc = ["0-10","11-20","21-30","31-40","41-50","over_50"]  # x값
     values = [f_file[0].count(1) / len(f_file[0]) * 100, f_file[1].count(1) / len(f_file[1]) * 100,
@@ -328,8 +323,6 @@ def pclass_data(ppfn1,ppfn2):
     p_file=[[],[],[]] #1,2,3
     p_dict={0:1,1:2,2:3}
     pclass_int=[]
-
-
 
     for i in ppfn1:
         if i is not int:
@@ -462,6 +455,9 @@ def sibsp_data(ssfn1,ssfn2):
 
     for i in range(0,9):
         print(len(s_file[i]))
+
+
+
 
 if  __name__ == "__main__":
     #rap=read_csv()
