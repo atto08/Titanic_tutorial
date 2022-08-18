@@ -59,14 +59,14 @@ def csv_connect2():
             survive_file.append(j)
     survive_file.pop(0)
 
-    s_file = []
+    sv_file = []
 
     for i in survive_file:
         for j in i:
             if j is not int:
-                s_file.append(int(j))
+                sv_file.append(int(j))
 
-    return s_file
+    return sv_file
 
 def Cabin_data(fn1,fn2):
     c_file=[[],[],[],[],[],[],[],[]] #none~g
@@ -84,33 +84,7 @@ def Cabin_data(fn1,fn2):
                 else:
                     c_file[j].append(1)
 
-    for a in range(0,7):
-        print(len(c_file[a]))
-
-    x = np.arange(8) #x값 개수
-    Pc = ["A", "B", "C", "D", "E", "F", "G", "NONE"] #x값
-    values = [c_file[1].count(1)/len(c_file[1])*100,c_file[2].count(1)/len(c_file[2])*100,c_file[3].count(1)/len(c_file[3])*100,c_file[4].count(1)/len(c_file[4])*100,
-              c_file[5].count(1)/len(c_file[5])*100,c_file[6].count(1)/len(c_file[6])*100,c_file[7].count(1)/len(c_file[7])*100,c_file[0].count(1)/len(c_file[0])*100] #y값
-    colors = ["tab:blue","tab:orange","tab:green","tab:red","tab:purple","tab:brown","tab:pink"
-              ,"tab:gray"] #막대 컬러
-    for i in range(len(Pc)):
-        plt.bar(x, values, color=colors[i], label=Pc[i]) #데이터 값, 막대 컬러 적용
-    plt.xticks(x, Pc) #x를 순서대로 나열
-
-    plt.title("Survival rate by cabin") #차트 제목
-    plt.xlabel("cabin") #x축 레이블
-    plt.ylabel("values") #y축 레이블
-
-    plt.ylim(0,100) #y축 범위
-
-    bar = plt.bar(x, values, color=colors) #텍스트 삽입
-    for rect in bar:
-        height=rect.get_height()
-        plt.text(rect.get_x()+rect.get_width()/2.0,height,"%.1f"%height,ha="center",va="bottom",size=12)
-
-    plt.legend()
-
-    plt.show()
+    return c_file
 
 def age_data(afn1,afn2):
     a_file=[[],[],[],[],[],[],[],[],[],[]] #none~90
@@ -142,34 +116,7 @@ def age_data(afn1,afn2):
             else:
                 a_file[9].append(1)
 
-    for i in range(0,10):
-        print(len(a_file[i]))
-
-    x = np.arange(10)  # x값 개수
-    Pc = ["0-10","10-20","20-30","30-40","40-50","50-60","60-70","70-80","80-90","none"]  # x값
-    values = [a_file[0].count(1)/len(a_file[0])*100, a_file[1].count(1) / len(a_file[1]) * 100, a_file[2].count(1) / len(a_file[2]) * 100, a_file[3].count(1) / len(a_file[3]) * 100,
-              a_file[4].count(1) / len(a_file[4]) * 100,a_file[5].count(1) / len(a_file[5]) * 100, a_file[6].count(1) / len(a_file[6]) * 100,
-              a_file[7].count(1) / len(a_file[7]) * 100,a_file[8].count(1) / len(a_file[8])*100, a_file[9].count(1) / len(a_file[9])*100]  # y값
-    colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown",
-              "tab:pink", "tab:gray", "tab:olive","tab:cyan"]  # 막대 컬러
-    for i in range(len(Pc)):
-        plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
-    plt.xticks(x, Pc)  # x를 순서대로 나열
-
-    plt.title("Survival rate by Age")  # 차트 제목
-    plt.xlabel("age")  # x축 레이블
-    plt.ylabel("values")  # y축 레이블
-
-    plt.ylim(0, 100)  # y축 범위
-
-    bar = plt.bar(x, values, color=colors)  # 텍스트 삽입
-    for rect in bar:
-        height = rect.get_height()
-        plt.text(rect.get_x() + rect.get_width() / 2.0, height, "%.1f" % height, ha="center", va="bottom", size=12)
-
-    plt.legend()
-
-    plt.show()
+    return a_file
 
 def embarked_data(efn1,efn2):
     e_file = [[], [], [], []]  # C, Q, S, none
@@ -190,32 +137,7 @@ def embarked_data(efn1,efn2):
             else:
                 e_file[3].append(0)
 
-    x = np.arange(3)  # x값 개수
-    Pc = ["C", "Q", "S"]  # x값
-    values = [e_file[0].count(1) / len(e_file[0]) * 100, e_file[1].count(1) / len(e_file[1]) * 100,
-              e_file[2].count(1) / len(e_file[2]) * 100]
-
-    colors = ["tab:blue", "tab:orange", "tab:green"]  # 막대 컬러
-    for i in range(len(Pc)):
-        plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
-    plt.xticks(x, Pc)  # x를 순서대로 나열
-
-    plt.title("Survival rate by embarked")  # 차트 제목
-    plt.xlabel("embarked")  # x축 레이블
-    plt.ylabel("values")  # y축 레이블
-
-    plt.ylim(0, 100)  # y축 범위
-
-    bar = plt.bar(x, values, color=colors)  # 텍스트 삽입
-    for rect in bar:
-        height = rect.get_height()
-        plt.text(rect.get_x() + rect.get_width() / 2.0, height, "%.1f" % height, ha="center", va="bottom", size=12)
-
-    plt.legend()
-
-    plt.show()
-
-    print(len(e_file[0]),len(e_file[1]),len(e_file[2]),len(e_file[3]))
+    return e_file
 
 def parch_data(pfn1,pfn2):
     #max(pfn1) #6
@@ -234,36 +156,7 @@ def parch_data(pfn1,pfn2):
                 else:
                     p_file[j].append(1)
 
-    for i in range(0,7):
-        print(len(p_file[i]))
-
-    x = np.arange(7)  # x값 개수
-    Pc = ["0","1","2","3","4","5","6"]  # x값
-    values = [p_file[0].count(1) / len(p_file[0]) * 100, p_file[1].count(1) / len(p_file[1]) * 100,
-              p_file[2].count(1) / len(p_file[2]) * 100, p_file[3].count(1) / len(p_file[3]) * 100, p_file[4].count(1) / len(p_file[4]) * 100,
-              p_file[5].count(1) / len(p_file[5]) * 100, p_file[6].count(1) / len(p_file[6]) * 100]
-
-    colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown",
-              "tab:pink"]  # 막대 컬러
-
-    for i in range(len(Pc)):
-        plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
-    plt.xticks(x, Pc)  # x를 순서대로 나열
-
-    plt.title("Survival rate by Parch")  # 차트 제목
-    plt.xlabel("parch")  # x축 레이블
-    plt.ylabel("values")  # y축 레이블
-
-    plt.ylim(0, 100)  # y축 범위
-
-    bar = plt.bar(x, values, color=colors)  # 텍스트 삽입
-    for rect in bar:
-        height = rect.get_height()
-        plt.text(rect.get_x() + rect.get_width() / 2.0, height, "%.1f" % height, ha="center", va="bottom", size=12)
-
-    plt.legend()
-
-    plt.show()
+    return p_file
 
 def fare_data(ffn1,ffn2):
     f_file=[[],[],[],[],[],[]] #0~50,50이상
@@ -291,33 +184,8 @@ def fare_data(ffn1,ffn2):
             else:
                 f_file[5].append(1)
 
-    x = np.arange(6)  # x값 개수
-    Pc = ["0-10","11-20","21-30","31-40","41-50","over_50"]  # x값
-    values = [f_file[0].count(1) / len(f_file[0]) * 100, f_file[1].count(1) / len(f_file[1]) * 100,
-              f_file[2].count(1) / len(f_file[2]) * 100, f_file[3].count(1) / len(f_file[3]) * 100, f_file[4].count(1) / len(f_file[4]) * 100,
-              f_file[5].count(1) / len(f_file[5]) * 100]
-    colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown"]  # 막대 컬러
+    return f_file
 
-    for i in range(len(Pc)):
-        plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
-    plt.xticks(x, Pc)  # x를 순서대로 나열
-
-    plt.title("Survival rate by Fare")  # 차트 제목
-    plt.xlabel("fare")  # x축 레이블
-    plt.ylabel("values")  # y축 레이블
-
-    plt.ylim(0, 100)  # y축 범위
-
-    bar = plt.bar(x, values, color=colors)  # 텍스트 삽입
-    for rect in bar:
-        height = rect.get_height()
-        plt.text(rect.get_x() + rect.get_width() / 2.0, height, "%.1f" % height, ha="center", va="bottom", size=12)
-
-    plt.legend()
-
-    plt.show()
-    for i in range(0,6):
-        print(len(f_file[i]))
 
 def pclass_data(ppfn1,ppfn2):
     p_file=[[],[],[]] #1,2,3
@@ -336,77 +204,26 @@ def pclass_data(ppfn1,ppfn2):
                 else:
                     p_file[j].append(1)
 
-
-    x = np.arange(3)  # x값 개수
-    Pc = ["1","2","3"]  # x값
-    values = [p_file[0].count(1) / len(p_file[0]) * 100,
-              p_file[1].count(1) / len(p_file[1]) * 100, p_file[2].count(1) / len(p_file[2])*100]
-
-    colors = ["tab:blue", "tab:orange", "tab:green"]  # 막대 컬러
-
-    for i in range(len(Pc)):
-        plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
-    plt.xticks(x, Pc)  # x를 순서대로 나열
-
-    plt.title("Survival rate by Pclass")  # 차트 제목
-    plt.xlabel("Pclass")  # x축 레이블
-    plt.ylabel("values")  # y축 레이블
-
-    plt.ylim(0, 100)  # y축 범위
-
-    bar = plt.bar(x, values, color=colors)  # 텍스트 삽입
-    for rect in bar:
-        height = rect.get_height()
-        plt.text(rect.get_x() + rect.get_width() / 2.0, height, "%.1f" % height, ha="center", va="bottom", size=12)
-
-    plt.legend()
-
-    plt.show()
-
-    for i in range(0,2):
-        print(p_file[i])
+    return p_file
 
 def sex_data(sfn1,sfn2):
-    male=[]
-    female=[]
+    sex_file=[[],[]] #male, female
 
     for i in range(0,891):
         if sfn1[i]=="male":
-            if sfn2[i]=="0":
-                male.append(0)
+            if sfn2[i]==0:
+                sex_file[0].append(0)
             else:
-                male.append(1)
+                sex_file[0].append(1)
         else:
-            if sfn2[i]=="0":
-                female.append(0)
+            if sfn2[i]==0:
+                sex_file[1].append(0)
             else:
-                female.append(1)
-    print(len(male),len(female))
+                sex_file[1].append(1)
 
-    x = np.arange(2)  # x값 개수
-    Pc = ["male","female"]  # x값
-    values = [male.count(1) / len(male) * 100, female.count(1) / len(female) * 100]
+    return sex_file
 
-    colors = ["tab:blue", "tab:orange"]  # 막대 컬러
 
-    for i in range(len(Pc)):
-        plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
-    plt.xticks(x, Pc)  # x를 순서대로 나열
-
-    plt.title("Survival rate by Sex")  # 차트 제목
-    plt.xlabel("sex")  # x축 레이블
-    plt.ylabel("values")  # y축 레이블
-
-    plt.ylim(0, 100)  # y축 범위
-
-    bar = plt.bar(x, values, color=colors)  # 텍스트 삽입
-    for rect in bar:
-        height = rect.get_height()
-        plt.text(rect.get_x() + rect.get_width() / 2.0, height, "%.1f" % height, ha="center", va="bottom", size=12)
-
-    plt.legend()
-
-    plt.show()
 def sibsp_data(ssfn1,ssfn2):
     #max(ssfn1) #max8
     s_file=[[],[],[],[],[],[],[],[],[]] #0~8
@@ -424,27 +241,42 @@ def sibsp_data(ssfn1,ssfn2):
                 else:
                     s_file[j].append(1)
 
+    return s_file
 
-    x = np.arange(9)  # x값 개수
-    Pc = ["0","1","2","3","4","5","6","7","8"]  # x값
-    values = [s_file[0].count(1) / len(s_file[0]) * 100, s_file[1].count(1) / len(s_file[1]) * 100, s_file[2].count(1) / len(s_file[2]) * 100,
-              s_file[3].count(1) / len(s_file[3]) * 100, s_file[4].count(1) / len(s_file[4]) * 100, s_file[5].count(1) / len(s_file[5]) * 100,
-              0,0, s_file[8].count(1) / len(s_file[8]) * 100]
 
-    colors = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown",
-              "tab:pink", "tab:gray", "tab:olive"]  # 막대 컬러
+def make_gr(dn,cn):
+    x = np.arange(len(dn))  # x값 개수
+    data_name = {"Cabin":["A", "B", "C", "D", "E", "F", "G", "NONE"],"Age":["0-10","10-20","20-30","30-40","40-50","50-60","60-70","70-80","80-90","NONE"],"Embarked":["C", "Q", "S"],
+                 "Parch":["0","1","2","3","4","5","6"],"Fare":["0-10","11-20","21-30","31-40","41-50","over_50"],"Pclass":["1","2","3"],"Sex":["male","female"],"SibSp":["0","1","2","3","4","5","6","7","8"]}
 
-    for i in range(len(Pc)):
-        plt.bar(x, values, color=colors[i], label=Pc[i])  # 데이터 값, 막대 컬러 적용
-    plt.xticks(x, Pc)  # x를 순서대로 나열
+    xdata = data_name[cn]
 
-    plt.title("Survival rate by Sibsp")  # 차트 제목
-    plt.xlabel("sibsp")  # x축 레이블
-    plt.ylabel("values")  # y축 레이블
+    values = []
+    colors = []
+    color_dict = {0:"tab:blue", 1:"tab:orange", 2:"tab:green", 3:"tab:red", 4:"tab:purple", 5:"tab:brown",
+             6:"tab:pink", 7:"tab:gray", 8:"tab:olive", 9:"tab:cyan"}
+
+
+    for i in range(len(dn)):
+        colors.append(color_dict[i])
+        if dn[i].count(1) == 0:
+            values.append(0)
+        else:
+            values.append(dn[i].count(1) / len(dn[i]) * 100)
+
+
+    for i in range(len(xdata)):
+        plt.bar(x, values, color=colors[i], label=xdata[i])  # 데이터 값, 막대 컬러 적용
+    plt.xticks(x, xdata)
+
+    plt.title("Survival rate by"+ cn)  # 차트 제목
+    plt.xlabel(cn)  # x축 레이블
+    plt.ylabel("percent")  # y축 레이블
 
     plt.ylim(0, 100)  # y축 범위
 
     bar = plt.bar(x, values, color=colors)  # 텍스트 삽입
+
     for rect in bar:
         height = rect.get_height()
         plt.text(rect.get_x() + rect.get_width() / 2.0, height, "%.1f" % height, ha="center", va="bottom", size=12)
@@ -453,23 +285,18 @@ def sibsp_data(ssfn1,ssfn2):
 
     plt.show()
 
-    for i in range(0,9):
-        print(len(s_file[i]))
-
-
-
-
 if  __name__ == "__main__":
     #rap=read_csv()
     #rap2=parsing(rap)
     #save_csv(rap2)
-    d1=csv_connect1("Age.csv")
+    d1=csv_connect1("Parch.csv")
     d2=csv_connect2()
-    #Cabin_data(d1,d2) #cabin 데이터
-    age_data(d1,d2) #age 데이터
-    #embarked_data(d1,d2) #embarked 데이터
-    #parch_data(d1,d2) #parch 데이터
-    #fare_data(d1,d2) #fare 데이터
-    #pclass_data(d1,d2) #pclass 데이터
-    #sex_data(d1,d2) #sex 데이터
-    #sibsp_data(d1,d2) #sibsp 데이터
+    #cabib=Cabin_data(d1,d2) #cabin 데이터
+    #age=age_data(d1,d2) #age 데이터
+    #embarked=embarked_data(d1,d2) #embarked 데이터
+    parch=parch_data(d1,d2) #parch 데이터
+    #fare=fare_data(d1,d2) #fare 데이터
+    #pclass=pclass_data(d1,d2) #pclass 데이터
+    #sex=sex_data(d1,d2) #sex 데이터
+    #sibsp=sibsp_data(d1,d2) #sibsp 데이터
+    make_gr(parch,"Parch")
