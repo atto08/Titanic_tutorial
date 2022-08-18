@@ -72,6 +72,8 @@ def Cabin_data(fn1,fn2):
     c_file=[[],[],[],[],[],[],[],[]] #none~g
     c_dict={0:"n", 1:"A", 2:"B",3:"C",4:"D",5:"E",6:"F",7:"G"}
 
+    #TODO: 891 변수로 바꿀것
+    # 두개 for문 합칠것
     for i in range(0,891):
         if fn1[i] == "":
             fn1[i] = "none"
@@ -89,6 +91,8 @@ def Cabin_data(fn1,fn2):
 def age_data(afn1,afn2):
     a_file=[[],[],[],[],[],[],[],[],[],[]] #none~90
 
+    #TODO: 891 변수로 바꿀것
+    # 두개 for문 합칠것
     for i in range(0,891):
         if afn1[i]=="":
             afn1[i]=-1
@@ -122,6 +126,8 @@ def embarked_data(efn1,efn2):
     e_file = [[], [], [], []]  # C, Q, S, none
     e_dict = {0: "C", 1: "Q", 2: "S"}
 
+    #TODO: 891 변수로 바꿀것
+    # 두개 for문 합칠것
     for i in range(0, 891):
         for j in range(0, 3):
             if efn1[i] == e_dict[j]:
@@ -144,6 +150,8 @@ def parch_data(pfn1,pfn2):
     p_file=[[],[],[],[],[],[],[]] #0~6
     p_int=[]
 
+    #TODO: 891 변수로 바꿀것
+    # 두개 for문 합칠것
     for n in range(0,891):
         if pfn1[n] is not int:
             p_int.append(int(pfn1[n]))
@@ -166,6 +174,8 @@ def fare_data(ffn1,ffn2):
         if i is not float:
             fare_f.append(float(i))
 
+    #TODO: 891 변수로 바꿀것
+    # 두개 for문 합칠것
     for i in range(0, 891):
         for j in range(0, 41, 10):
             k = j + 10
@@ -196,6 +206,7 @@ def pclass_data(ppfn1,ppfn2):
         if i is not int:
             pclass_int.append(int(i))
 
+    #TODO: 891 변수로 바꿀것
     for i in range(0,891):
         for j in range(0,3):
             if pclass_int[i] == p_dict[j]:
@@ -208,7 +219,7 @@ def pclass_data(ppfn1,ppfn2):
 
 def sex_data(sfn1,sfn2):
     sex_file=[[],[]] #male, female
-
+    #TODO: 891 변수로 바꿀것
     for i in range(0,891):
         if sfn1[i]=="male":
             if sfn2[i]==0:
@@ -232,7 +243,7 @@ def sibsp_data(ssfn1,ssfn2):
     for i in ssfn1:
         if i is not int:
             sibsp_int.append(int(i))
-
+    #TODO: 891 변수로 바꿀것
     for i in range(0,891):
         for j in range(0,9):
             if sibsp_int[i] == j:
