@@ -68,17 +68,21 @@ def csv_connect2():
 
     return sv_file
 
-def Cabin_data(fn1,fn2):
+def count_data(datafile):
+    count=[]
+
+    for i in datafile:
+        count.append(i)
+
+    return count
+
+def Cabin_data(fn1,fn2,cd):
     c_file=[[],[],[],[],[],[],[],[]] #none~g
     c_dict={0:"n", 1:"A", 2:"B",3:"C",4:"D",5:"E",6:"F",7:"G"}
 
-    #TODO: 891 변수로 바꿀것
-    # 두개 for문 합칠것
-    for i in range(0,891):
-        if fn1[i] == "":
-            fn1[i] = "none"
-
-    for k in range(0,891):
+    for k in range(len(cd)):
+        if fn1[k] == "":
+            fn1[k] = "none"
         for j in range(0,8):
             if fn1[k][0] == c_dict[j]:
                 if fn2[k] == 0:
@@ -88,21 +92,18 @@ def Cabin_data(fn1,fn2):
 
     return c_file
 
-def age_data(afn1,afn2):
+def age_data(afn1,afn2,cd):
     a_file=[[],[],[],[],[],[],[],[],[],[]] #none~90
 
-    #TODO: 891 변수로 바꿀것
-    # 두개 for문 합칠것
-    for i in range(0,891):
-        if afn1[i]=="":
-            afn1[i]=-1
-
     Age_int = []
+
     for i in afn1:
         if i is not float:
             Age_int.append(float(i))
 
-    for i in range(0,891):
+    for i in range(len(cd)):
+        if afn1[i]=="":
+            afn1[i]=-1
         for j in range(0,81,10):
             k = j + 10
             n = j / 10
@@ -122,13 +123,17 @@ def age_data(afn1,afn2):
 
     return a_file
 
-def embarked_data(efn1,efn2):
+def embarked_data(efn1,efn2,cd):
     e_file = [[], [], [], []]  # C, Q, S, none
     e_dict = {0: "C", 1: "Q", 2: "S"}
 
-    #TODO: 891 변수로 바꿀것
-    # 두개 for문 합칠것
-    for i in range(0, 891):
+
+    for i in range(len(cd)):
+        if efn1[i] == "":
+            if efn2[i] ==0:
+                e_file[3].append(0)
+            else:
+                e_file[3].append(0)
         for j in range(0, 3):
             if efn1[i] == e_dict[j]:
                 if efn2[i] == 0:
@@ -136,27 +141,17 @@ def embarked_data(efn1,efn2):
                 else:
                     e_file[j].append(1)
 
-    for i in range(0, 891):
-        if efn1[i] == "":
-            if efn2[i] ==0:
-                e_file[3].append(0)
-            else:
-                e_file[3].append(0)
-
     return e_file
 
-def parch_data(pfn1,pfn2):
+def parch_data(pfn1,pfn2,cd):
     #max(pfn1) #6
     p_file=[[],[],[],[],[],[],[]] #0~6
     p_int=[]
 
-    #TODO: 891 변수로 바꿀것
-    # 두개 for문 합칠것
-    for n in range(0,891):
-        if pfn1[n] is not int:
-            p_int.append(int(pfn1[n]))
 
-    for i in range(0,891):
+    for i in range(len(cd)):
+        if pfn1[i] is not int:
+            p_int.append(int(pfn1[i]))
         for j in range(0,7):
             if p_int[i] == j:
                 if pfn2[i] == 0:
@@ -166,7 +161,7 @@ def parch_data(pfn1,pfn2):
 
     return p_file
 
-def fare_data(ffn1,ffn2):
+def fare_data(ffn1,ffn2,cd):
     f_file=[[],[],[],[],[],[]] #0~50,50이상
     fare_f=[]
 
@@ -174,9 +169,13 @@ def fare_data(ffn1,ffn2):
         if i is not float:
             fare_f.append(float(i))
 
-    #TODO: 891 변수로 바꿀것
-    # 두개 for문 합칠것
-    for i in range(0, 891):
+
+    for i in range(len(cd)):
+        if 50 <= fare_f[i]:
+            if ffn2[i] == 0:
+                f_file[5].append(0)
+            else:
+                f_file[5].append(1)
         for j in range(0, 41, 10):
             k = j + 10
             n = j / 10
@@ -187,17 +186,11 @@ def fare_data(ffn1,ffn2):
                     f_file[m].append(0)
                 else:
                     f_file[m].append(1)
-    for i in range(0,891):
-        if 50 <= fare_f[i]:
-            if ffn2[i] == 0:
-                f_file[5].append(0)
-            else:
-                f_file[5].append(1)
 
     return f_file
 
 
-def pclass_data(ppfn1,ppfn2):
+def pclass_data(ppfn1,ppfn2,cd):
     p_file=[[],[],[]] #1,2,3
     p_dict={0:1,1:2,2:3}
     pclass_int=[]
@@ -206,8 +199,8 @@ def pclass_data(ppfn1,ppfn2):
         if i is not int:
             pclass_int.append(int(i))
 
-    #TODO: 891 변수로 바꿀것
-    for i in range(0,891):
+
+    for i in range(len(cd)):
         for j in range(0,3):
             if pclass_int[i] == p_dict[j]:
                 if ppfn2[i] == 0:
@@ -217,10 +210,10 @@ def pclass_data(ppfn1,ppfn2):
 
     return p_file
 
-def sex_data(sfn1,sfn2):
+def sex_data(sfn1,sfn2,cd):
     sex_file=[[],[]] #male, female
-    #TODO: 891 변수로 바꿀것
-    for i in range(0,891):
+
+    for i in range(len(cd)):
         if sfn1[i]=="male":
             if sfn2[i]==0:
                 sex_file[0].append(0)
@@ -235,7 +228,7 @@ def sex_data(sfn1,sfn2):
     return sex_file
 
 
-def sibsp_data(ssfn1,ssfn2):
+def sibsp_data(ssfn1,ssfn2,cd):
     #max(ssfn1) #max8
     s_file=[[],[],[],[],[],[],[],[],[]] #0~8
 
@@ -243,8 +236,8 @@ def sibsp_data(ssfn1,ssfn2):
     for i in ssfn1:
         if i is not int:
             sibsp_int.append(int(i))
-    #TODO: 891 변수로 바꿀것
-    for i in range(0,891):
+
+    for i in range(len(cd)):
         for j in range(0,9):
             if sibsp_int[i] == j:
                 if ssfn2[i] == 0:
@@ -257,7 +250,7 @@ def sibsp_data(ssfn1,ssfn2):
 
 def make_gr(dn,cn):
     x = np.arange(len(dn))  # x값 개수
-    data_name = {"Cabin":["A", "B", "C", "D", "E", "F", "G", "NONE"],"Age":["0-10","10-20","20-30","30-40","40-50","50-60","60-70","70-80","80-90","NONE"],"Embarked":["C", "Q", "S"],
+    data_name = {"Cabin":["NONE","A", "B", "C", "D", "E", "F", "G"],"Age":["0-10","10-20","20-30","30-40","40-50","50-60","60-70","70-80","80-90","NONE"],"Embarked":["C", "Q", "S","none"],
                  "Parch":["0","1","2","3","4","5","6"],"Fare":["0-10","11-20","21-30","31-40","41-50","over_50"],"Pclass":["1","2","3"],"Sex":["male","female"],"SibSp":["0","1","2","3","4","5","6","7","8"]}
 
     xdata = data_name[cn]
@@ -300,14 +293,15 @@ if  __name__ == "__main__":
     #rap=read_csv()
     #rap2=parsing(rap)
     #save_csv(rap2)
-    d1=csv_connect1("Parch.csv")
+    d1=csv_connect1("Cabin.csv")
     d2=csv_connect2()
-    #cabib=Cabin_data(d1,d2) #cabin 데이터
-    #age=age_data(d1,d2) #age 데이터
-    #embarked=embarked_data(d1,d2) #embarked 데이터
-    parch=parch_data(d1,d2) #parch 데이터
-    #fare=fare_data(d1,d2) #fare 데이터
-    #pclass=pclass_data(d1,d2) #pclass 데이터
-    #sex=sex_data(d1,d2) #sex 데이터
-    #sibsp=sibsp_data(d1,d2) #sibsp 데이터
-    make_gr(parch,"Parch")
+    d3=count_data(d1)
+    cabin=Cabin_data(d1,d2,d3) #cabin 데이터
+    #age=age_data(d1,d2,d3) #age 데이터
+    #embarked=embarked_data(d1,d2,d3) #embarked 데이터
+    #parch=parch_data(d1,d2,d3) #parch 데이터
+    #fare=fare_data(d1,d2,d3) #fare 데이터
+    #pclass=pclass_data(d1,d2,d3) #pclass 데이터
+    #sex=sex_data(d1,d2,d3) #sex 데이터
+    #sibsp=sibsp_data(d1,d2,d3) #sibsp 데이터
+    make_gr(cabin,"Cabin")
