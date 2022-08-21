@@ -90,37 +90,39 @@ def Cabin_data(fn1,fn2,cd):
     return cabin_list
 
 def age_data(afn1,afn2,cd):
-    a_file=[[],[],[],[],[],[],[],[],[],[]] #none~90
+    age_list=[[],[],[],[],[],[],[],[],[],[]] #none~90
+    a_dict = {0: 0, 1: 10, 2: 20, 3: 30, 4: 40, 5: 50, 6: 60, 7: 70, 8: 80}
+    a_dict_count = len(a_dict)
 
     Age_float = []
 
-    for i in range(len(cd)):
-        if afn1[i]=="":
-            afn1[i]=-1
-
     for i in afn1:
+        for j in range(len(cd)):
+            if afn1[j]=="":
+                afn1[j]="-1"
         if i is not float:
             Age_float.append(float(i))
 
+
     for i in range(len(cd)):
-        for j in range(0,81,10):
-            k = j + 10
-            n = j / 10
-            m = int(n)
-            #딕셔너리 사용 해서 완료 해보기
-            if j <= Age_float[i] < k:
+        for j in range(a_dict_count):
+            p = a_dict[j] + 10
+
+            if a_dict[j] <= Age_float[i] < p:
                 if afn2[i] == 0:
-                    a_file[m].append(0)
+                    age_list[j].append(0)
                 else:
-                    a_file[m].append(1)
+                    age_list[j].append(1)
 
-        if Age_float[i] == -1:
-            if afn2[i] == 0:
-                a_file[9].append(0)
             else:
-                a_file[9].append(1)
+                if afn2[i] == 0:
+                    age_list[-1].append(0)
+                else:
+                    age_list[-1].append(1)
 
-    return a_file
+    return age_list
+
+
 
 def embarked_data(efn1,efn2,cd):
     embarked_list = [[], [], [], []]  # C, Q, S, none
@@ -162,33 +164,30 @@ def parch_data(pfn1,pfn2,cd):
     return parch_list
 
 def fare_data(ffn1,ffn2,cd):
-    f_file=[[],[],[],[],[],[]] #0~50,50이상
+    fare_list=[[],[],[],[],[],[]] #0~50,50이상
+    f_dict={0:0,1:10,2:20,3:30,4:40}
+    f_dict_count = len(f_dict)
     fare_f=[]
 
     for i in ffn1:
         if i is not float:
             fare_f.append(float(i))
 
-
     for i in range(len(cd)):
-        if 50 <= fare_f[i]:
+        if 50<= fare_f[i]:
             if ffn2[i] == 0:
-                f_file[5].append(0)
+                fare_list[-1].append(0)
             else:
-                f_file[5].append(1)
-        for j in range(0, 41, 10):
-            k = j + 10
-            n = j / 10
-            m = int(n)
-
-            if j <= fare_f[i] < k:
+                fare_list[-1].append(1)
+        for j in range(f_dict_count):
+            p = f_dict[j] + 10
+            if f_dict[j] <= fare_f[i] < p:
                 if ffn2[i] == 0:
-                    f_file[m].append(0)
+                    fare_list[j].append(0)
                 else:
-                    f_file[m].append(1)
+                    fare_list[j].append(1)
 
-    return f_file
-
+    return fare_list
 
 def pclass_data(ppfn1,ppfn2,cd):
     pclass_list=[[],[],[]] #1,2,3
@@ -287,18 +286,22 @@ def make_gr(dn,cn):
 
     plt.show()
 
+
+    for i in range(len(dn)):
+        print(len(dn[i]))
+
 if  __name__ == "__main__":
     #rap=read_csv()
     #rap2=parsing(rap)
     #save_csv(rap2)
-    d1,d2=csv_connect1("Age.csv")
+    d1,d2=csv_connect1("Fare.csv")
     d3=count_data(d1)
     #cabin=Cabin_data(d1,d2,d3) #cabin 데이터
-    age=age_data(d1,d2,d3) #age 데이터
+    #age=age_data(d1,d2,d3) #age 데이터
     #embarked=embarked_data(d1,d2,d3) #embarked 데이터
     #parch=parch_data(d1,d2,d3) #parch 데이터
-    #fare=fare_data(d1,d2,d3) #fare 데이터
+    fare=fare_data(d1,d2,d3) #fare 데이터
     #pclass=pclass_data(d1,d2,d3) #pclass 데이터
     #sex=sex_data(d1,d2,d3) #sex 데이터
     #sibsp=sibsp_data(d1,d2,d3) #sibsp 데이터
-    make_gr(age,"Age")
+    make_gr(fare,"Fare")
